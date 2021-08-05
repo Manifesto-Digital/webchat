@@ -70,7 +70,6 @@ export default {
 .od-message-rich.mt {
   background: var(--od-received-message-background);
   border-radius: 10px;
-  box-shadow: 0 13px 12px 2px rgba(0, 0, 0, 0.14);
   padding: 0 10px;
   max-width: calc(100% - 40px);
   width: 251px;

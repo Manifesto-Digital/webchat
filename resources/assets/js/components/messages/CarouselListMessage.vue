@@ -35,12 +35,12 @@
       </slider>
 
       <div class="od-carousel--arrows">
-        <div v-if="showLeftArrow" class="od-carousel--arrow-left" @click="previousPage">
+        <button :disabled="!showLeftArrow" class="od-carousel__arrow od-carousel--arrow-left" @click="previousPage">
           <img src="/vendor/webchat/images/left.svg" />
-        </div>
-        <div v-if="showRightArrow" class="od-carousel--arrow-right" @click="nextPage">
+        </button>
+        <button :disabled="!showRightArrow" class="od-carousel__arrow od-carousel--arrow-right" @click="nextPage">
           <img src="/vendor/webchat/images/right.svg" />
-        </div>
+        </button>
       </div>
     </template>
     <template v-else>
@@ -137,16 +137,33 @@ export default {
 
 <style lang="scss">
 .od-carousel {
+  .mt-wrapper.first-message &,
+  .mt-wrapper.last-message &,
+  .mt-wrapper.middle-message & {
+    .mt {
+      border-radius: 10px;
+    }
+  }
   .od-carousel--arrows {
     position: absolute;
     top: calc(50% - 25px);
     width: calc(100% - 6px);
     left: 3px;
   }
-  .od-carousel--arrows div {
-    width: 20px;
-    height: 20px;
+  .od-carousel--arrows .od-carousel__arrow {
+    background: none;
+    border: none;
     cursor: pointer;
+    height: 20px;
+    outline: 0;
+    padding: 0;
+    width: 20px;
+
+    &:disabled {
+      cursor: default;
+      opacity: 0.3;
+      pointer-events: none;
+    }
   }
   .od-carousel--arrows img {
     width: 100%;
