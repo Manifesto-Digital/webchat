@@ -87,8 +87,10 @@ const defaultBootstrapFunctions = {
         ifrm.style.height = (event.data.height === 'auto') ? '' : event.data.height;
 
         if (event.data.height === 'auto') {
+          ifrm.style.transition = `all 0.3s ease-in-out`
           document.body.classList.add('chatbot-no-scroll');
         } else {
+          ifrm.style.transition = `none`
           document.body.classList.remove('chatbot-no-scroll');
         }
       }

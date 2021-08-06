@@ -8,7 +8,6 @@ iframe#opendialog-chatwindow {
   width: 463px;
   background-color: #fff;
   box-sizing: border-box;
-  transition: 0.3s ease-in-out;
 }
 
 iframe.open#opendialog-chatwindow {

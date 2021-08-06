@@ -614,7 +614,7 @@ export default {
   }
 
   .od-fp-form__submit:hover {
-    color: var(--od-button-hover-background);
+    color: var(--od-button-text);
     background-color: var(--od-button-hover-background);
   }
 
