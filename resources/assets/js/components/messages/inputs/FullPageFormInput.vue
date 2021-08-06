@@ -56,6 +56,7 @@
             <option
               v-for="(option_text, option_value) in element.options"
               v-bind:value="option_value"
+              :key="option_value"
             >{{ option_text }}</option>
           </select>
         </template>
@@ -127,7 +128,7 @@
         class="od-fp-form__error animateStartingState animateDelay1"
         :class="{animateSlideUp: isOpen}"
         >
-        <p v-for="error in errorMessages">{{ error }}</p>
+        <p v-for="(error, i) in errorMessages" :key="i">{{ error }}</p>
       </div>
 
       <div class="od-fp-form__submit-wrapper">
