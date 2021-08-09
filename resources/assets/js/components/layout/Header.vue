@@ -404,6 +404,7 @@ export default {
       height: 110px;
       margin: 10px 0;
       background: none !important;
+      justify-content: flex-end;
 
       .od-header-nav {
         display: none;
