@@ -15,7 +15,7 @@
         <div class="od-header-cta__icon"></div>
 
         <div v-if="ctaText.length" class="od-header-cta__text" ref="headerCtaText">
-          <span v-for="text in ctaText">{{ text }}</span>
+          <span v-for="text in ctaText" :key="text">{{ text }}</span>
         </div>
       </div>
 
@@ -378,6 +378,7 @@ export default {
       justify-content: flex-end;
       align-items: center;
       order: 1;
+      padding: 10px;
 
       @media (min-width: $media-med) {
         order: unset;
@@ -403,6 +404,7 @@ export default {
       height: 110px;
       margin: 10px 0;
       background: none !important;
+      justify-content: flex-end;
 
       .od-header-nav {
         display: none;

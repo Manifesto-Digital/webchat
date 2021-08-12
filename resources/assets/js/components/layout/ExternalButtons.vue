@@ -168,6 +168,12 @@ export default {
   overflow: hidden;
   position: relative;
 
+  .iframe & {
+    .od-external-button .od-external-button__button {
+      padding: 10px 20px;
+    }
+  }
+
   .od-external-button {
     background-color: var(--od-message-list-background);
     text-align: center;
@@ -199,7 +205,7 @@ export default {
     .od-external-button__button:hover {
       background-color: var(--od-external-button-hover-background);
       color: var(--od-external-button-text);
-      border: 2px solid var(--od-external-button-hover-background);
+      border: 2px solid var(--od-external-button-background);
     }
   } 
 
