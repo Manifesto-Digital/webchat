@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "749a25d86c87b5abd036302cf8c88762",
+    "content-hash": "aa5e739d5ca008b2d89a2514a3dae478",
     "packages": [
         {
             "name": "brick/math",
@@ -5532,16 +5532,16 @@
         },
         {
             "name": "opendialogai/core",
-            "version": "1.0.0",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/opendialogai/core.git",
-                "reference": "42c180d78d1907dc963eed4fcff12008bf3a7e31"
+                "reference": "ca06460161bfd1012f8dcaecea1faeb777fc9693"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/opendialogai/core/zipball/42c180d78d1907dc963eed4fcff12008bf3a7e31",
-                "reference": "42c180d78d1907dc963eed4fcff12008bf3a7e31",
+                "url": "https://api.github.com/repos/opendialogai/core/zipball/ca06460161bfd1012f8dcaecea1faeb777fc9693",
+                "reference": "ca06460161bfd1012f8dcaecea1faeb777fc9693",
                 "shasum": ""
             },
             "require": {
@@ -5617,9 +5617,9 @@
             "description": "The OpenDialog Core package",
             "support": {
                 "issues": "https://github.com/opendialogai/core/issues",
-                "source": "https://github.com/opendialogai/core/tree/1.0.0"
+                "source": "https://github.com/opendialogai/core/tree/1.1.0"
             },
-            "time": "2021-07-19T10:52:04+00:00"
+            "time": "2021-08-16T14:36:31+00:00"
         },
         {
             "name": "orchestra/testbench",
