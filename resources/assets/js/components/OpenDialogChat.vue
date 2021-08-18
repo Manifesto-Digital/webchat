@@ -753,9 +753,7 @@ export default {
         if (window.self !== window.top) {
           if (!this.isOpen) {
             window.parent.postMessage({ height: `120px` }, this.referrerUrl);
-            setTimeout(() => {
-              window.parent.postMessage({ width: `130px` }, this.referrerUrl);
-            }, 200);
+            window.parent.postMessage({ width: `130px` }, this.referrerUrl);
           } else {
             window.parent.postMessage({ height: "auto" }, this.referrerUrl);
             window.parent.postMessage({ width: "auto" }, this.referrerUrl);

@@ -95,7 +95,7 @@
     }
   
     .od-user-input__buttons .od-send-btn:hover {
-      background-color: darken(#00f, 10);
+      background-color: var(--od-button-hover-background);
     }
   }
   
@@ -103,12 +103,12 @@
   
   .od-fp-form {
     .od-fp-form__submit:hover {
-      background-color: darken(#00f, 10);
+      background-color: var(--od-button-hover-background);
       color: var(--od-button-text);
     }
   
     .od-fp-form__submit:focus {
-      border: 1px solid darken(#00f, 10);
+      border: 1px solid var(--od-button-hover-background);
       outline: none;
     }
   }
