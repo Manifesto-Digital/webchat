@@ -11,7 +11,7 @@ use OpenDialogAi\AttributeEngine\Exceptions\AttributeDoesNotExistException;
 use OpenDialogAi\ContextEngine\Contexts\User\UserContext;
 use OpenDialogAi\ContextEngine\Facades\ContextService;
 use OpenDialogAi\Core\Components\Configuration\ComponentConfiguration;
-use OpenDialogAi\Core\Console\Commands\CreateCoreConfigurations;
+use OpenDialogAi\Core\Components\Configuration\ConfigurationDataHelper;
 use OpenDialogAi\Core\Conversation\Conversation;
 use OpenDialogAi\Webchat\WebchatSetting;
 use OpenDialogAi\Webchat\WebchatSettingsConfiguration\Service\WebchatSettingsConfigurationPageInformation;
@@ -37,7 +37,7 @@ class WebchatSettings
 
         /** @var ComponentConfiguration $configuration */
         $configuration = ComponentConfiguration::where([
-            'name' => CreateCoreConfigurations::WEBCHAT_PLATFORM,
+            'name' => ConfigurationDataHelper::WEBCHAT_PLATFORM,
             'scenario_id' => $request->get('scenario_id'),
         ])->first();
 
