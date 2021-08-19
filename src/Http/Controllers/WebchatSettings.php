@@ -41,6 +41,10 @@ class WebchatSettings
             'scenario_id' => $request->get('scenario_id'),
         ])->first();
 
+        if (is_null($configuration)) {
+            return response()->json([]);
+        }
+
         $settings = $this->setDynamicSettings($configuration->configuration, $request);
 
         // Return the config as JSON.
