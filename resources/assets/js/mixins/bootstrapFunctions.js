@@ -69,9 +69,10 @@ export function setVh() {
   return vh
 }
 
-export function getSettings(url, userId = '', customSettings = null, callbackId = null, width = null) {
+export function getSettings(url, scenarioId, userId = '', customSettings = null, callbackId = null, width = null) {
   let configUrlObj = new URLSearchParams();
   configUrlObj.append('url', locationOrSpoof());
+  configUrlObj.append('scenario_id', scenarioId);
 
   if (userId) {
     configUrlObj.append('user_id', userId);
