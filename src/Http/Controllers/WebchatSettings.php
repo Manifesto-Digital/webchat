@@ -2,12 +2,16 @@
 
 namespace OpenDialogAi\Webchat\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use OpenDialogAi\AttributeEngine\CoreAttributes\UserAttribute;
 use OpenDialogAi\AttributeEngine\CoreAttributes\UtteranceAttribute;
 use OpenDialogAi\AttributeEngine\Exceptions\AttributeDoesNotExistException;
 use OpenDialogAi\ContextEngine\Contexts\User\UserContext;
 use OpenDialogAi\ContextEngine\Facades\ContextService;
+use OpenDialogAi\Core\Components\Configuration\ComponentConfiguration;
+use OpenDialogAi\Core\Console\Commands\CreateCoreConfigurations;
 use OpenDialogAi\Core\Conversation\Conversation;
 use OpenDialogAi\Webchat\WebchatSetting;
 use OpenDialogAi\Webchat\WebchatSettingsConfiguration\Service\WebchatSettingsConfigurationPageInformation;
@@ -22,8 +26,8 @@ class WebchatSettings
     /**
      * Handle the incoming request.
      *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return JsonResponse|Response
      */
     public function __invoke(Request $request)
     {
@@ -31,37 +35,75 @@ class WebchatSettings
             return response($error, 400);
         }
 
-        // Create the config object.
-        $config = [];
+        /** @var ComponentConfiguration $configuration */
+        $configuration = ComponentConfiguration::where([
+            'name' => CreateCoreConfigurations::WEBCHAT_PLATFORM,
+            'scenario_id' => $request->get('scenario_id'),
+        ])->first();
 
-        // First, get all child settings.
-        $parentIds = [];
-        $childSettings = WebchatSetting::whereNotNull('parent_id')->get();
-        foreach ($childSettings as $childSetting) {
-            if (!in_array($childSetting->parent_id, $parentIds)) {
-                $parentIds[] = $childSetting->parent_id;
-            }
+        $settings = $this->setDynamicSettings($configuration->configuration, $request);
+
+        // Return the config as JSON.
+        return response()->json($settings);
+    }
+
+    /**
+     * @param Request $request
+     * @return string|null
+     */
+    private function validateRequest(Request $request)
+    {
+        if (!$request->get('scenario_id')) {
+            return 'No scenario_id given.';
         }
 
-        // Next, get all top level settings.
-        $settings = WebchatSetting::whereNull('parent_id')->get();
-
-        // Build the config array.
-        foreach ($settings as $setting) {
-            if (!in_array($setting->id, $parentIds) && !is_null($setting->value)) {
-                $value = $this->castValue($setting->type, $setting->value);
-                $config[$setting->name] = $value;
-            } else {
-                foreach ($childSettings as $idx => $childSetting) {
-                    if (($childSetting->parent_id == $setting->id) && !is_null($childSetting->value)) {
-                        $value = $this->castValue($childSetting->type, $childSetting->value);
-                        $config[$setting->name][$childSetting->name] = $value;
-                        unset($childSettings[$idx]);
-                    }
-                }
-            }
+        if ($request->get('width') && !is_numeric($request->get('width'))) {
+            return 'Width parameter must be an integer.';
         }
 
+        if ($request->get('url') && !filter_var($request->get('url'), FILTER_VALIDATE_URL)) {
+            return 'Url parameter is not a valid URL.';
+        }
+
+        return null;
+    }
+
+    /**
+     * Uses the user history record to establish whether this is a new, returning or ongoing user.
+     * If there is no user context available => new user
+     * If the user is currently in a conversation => ongoing user
+     * If the user is not currently in a conversation => returning user
+     *
+     * @param $userId
+     * @return string
+     */
+    private function getUserType($userId): string
+    {
+        /** @var UserContext $userContext */
+        $userContext = ContextService::getContext(UserContext::USER_CONTEXT);
+        $userContext->setUserId($userId);
+
+        try {
+            /** @var UserAttribute $userAttribute */
+            $userAttribute = $userContext->getAttribute(UtteranceAttribute::UTTERANCE_USER, true);
+
+            if ($userAttribute->getUserHistoryRecord()->getConversationId() === Conversation::UNDEFINED) {
+                return self::RETURNING_USER;
+            }
+
+            return self::ONGOING_USER;
+        } catch (AttributeDoesNotExistException $e) {
+            return self::NEW_USER;
+        }
+    }
+
+    /**
+     * @param array $config
+     * @param Request $request
+     * @return array
+     */
+    private function setDynamicSettings(array $config, Request $request): array
+    {
         $config[WebchatSetting::USER_TYPE] = self::NEW_USER;
         $config[WebchatSetting::SHOW_MINIMIZED] = false;
         $config[WebchatSetting::OPEN_INTENT] = 'WELCOME';
@@ -113,80 +155,6 @@ class WebchatSettings
         }
         // phpcs:enable
 
-        // Return the config as JSON.
-        return json_encode($settings);
-    }
-
-    /**
-     * Handle the incoming request.
-     *
-     * @param string $type
-     * @param string $value
-     * @return mixed
-     */
-    private function castValue($type, $value)
-    {
-        switch ($type) {
-            case 'number':
-                $value = (int)$value;
-                break;
-            case 'boolean':
-                $value = boolval($value);
-                break;
-            case 'map':
-            case 'object':
-                $value = json_decode($value);
-                break;
-            default:
-                break;
-        }
-
-        return $value;
-    }
-
-    /**
-     * @param \Illuminate\Http\Request $request
-     * @return string|null
-     */
-    private function validateRequest(Request $request)
-    {
-        if ($request->get('width') && !is_numeric($request->get('width'))) {
-            return 'Width parameter must be an integer.';
-        }
-
-        if ($request->get('url') && !filter_var($request->get('url'), FILTER_VALIDATE_URL)) {
-            return 'Url parameter is not a valid URL.';
-        }
-
-        return null;
-    }
-
-    /**
-     * Uses the user history record to establish whether this is a new, returning or ongoing user.
-     * If there is no user context available => new user
-     * If the user is currently in a conversation => ongoing user
-     * If the user is not currently in a conversation => returning user
-     *
-     * @param $userId
-     * @return string
-     */
-    private function getUserType($userId): string
-    {
-        /** @var UserContext $userContext */
-        $userContext = ContextService::getContext(UserContext::USER_CONTEXT);
-        $userContext->setUserId($userId);
-
-        try {
-            /** @var UserAttribute $userAttribute */
-            $userAttribute = $userContext->getAttribute(UtteranceAttribute::UTTERANCE_USER, true);
-
-            if ($userAttribute->getUserHistoryRecord()->getConversationId() === Conversation::UNDEFINED) {
-                return self::RETURNING_USER;
-            }
-
-            return self::ONGOING_USER;
-        } catch (AttributeDoesNotExistException $e) {
-            return self::NEW_USER;
-        }
+        return $settings;
     }
 }
