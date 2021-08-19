@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "aa5e739d5ca008b2d89a2514a3dae478",
+    "content-hash": "ccfd6e585e35c75aebd4f4e9a3ff3e3b",
     "packages": [
         {
             "name": "brick/math",
@@ -5532,16 +5532,16 @@
         },
         {
             "name": "opendialogai/core",
-            "version": "1.1.0",
+            "version": "dev-feature/OPNDLG-976--platform-configuration",
             "source": {
                 "type": "git",
                 "url": "https://github.com/opendialogai/core.git",
-                "reference": "ca06460161bfd1012f8dcaecea1faeb777fc9693"
+                "reference": "31d2a23c470d6f895b884e9b9cd2e73f77d8640f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/opendialogai/core/zipball/ca06460161bfd1012f8dcaecea1faeb777fc9693",
-                "reference": "ca06460161bfd1012f8dcaecea1faeb777fc9693",
+                "url": "https://api.github.com/repos/opendialogai/core/zipball/31d2a23c470d6f895b884e9b9cd2e73f77d8640f",
+                "reference": "31d2a23c470d6f895b884e9b9cd2e73f77d8640f",
                 "shasum": ""
             },
             "require": {
@@ -5580,6 +5580,7 @@
                         "OpenDialogAi\\ResponseEngine\\ResponseEngineServiceProvider",
                         "OpenDialogAi\\InterpreterEngine\\InterpreterEngineServiceProvider",
                         "OpenDialogAi\\OperationEngine\\OperationEngineServiceProvider",
+                        "OpenDialogAi\\PlatformEngine\\PlatformEngineServiceProvider",
                         "OpenDialogAi\\AttributeEngine\\AttributeEngineServiceProvider",
                         "OpenDialogAi\\ContextEngine\\ContextEngineServiceProvider",
                         "OpenDialogAi\\ActionEngine\\ActionEngineServiceProvider",
@@ -5604,6 +5605,7 @@
                     "OpenDialogAi\\ResponseEngine\\": "src/ResponseEngine",
                     "OpenDialogAi\\InterpreterEngine\\": "src/InterpreterEngine",
                     "OpenDialogAi\\OperationEngine\\": "src/OperationEngine",
+                    "OpenDialogAi\\PlatformEngine\\": "src/PlatformEngine",
                     "OpenDialogAi\\SensorEngine\\": "src/SensorEngine",
                     "OpenDialogAi\\NlpEngine\\": "src/NlpEngine",
                     "OpenDialogAi\\Core\\Database\\": "database/",
@@ -5617,9 +5619,9 @@
             "description": "The OpenDialog Core package",
             "support": {
                 "issues": "https://github.com/opendialogai/core/issues",
-                "source": "https://github.com/opendialogai/core/tree/1.1.0"
+                "source": "https://github.com/opendialogai/core/tree/feature/OPNDLG-976--platform-configuration"
             },
-            "time": "2021-08-16T14:36:31+00:00"
+            "time": "2021-08-19T08:08:42+00:00"
         },
         {
             "name": "orchestra/testbench",
@@ -8277,7 +8279,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "opendialogai/core": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
