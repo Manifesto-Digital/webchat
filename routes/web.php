@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::group(['middleware' => 'web'], function () {
+Route::group(['middleware' => 'bindings'], function () {
 
     if (config('opendialog.webchat.allow-fullpage')) {
         Route::get('/web-chat', function () {
