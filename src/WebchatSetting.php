@@ -3,14 +3,12 @@
 namespace OpenDialogAi\Webchat;
 
 use Illuminate\Database\Eloquent\Model;
-use OpenDialogAi\Webchat\Casts\WebchatSettingsValueCast;
 
 /**
  * @property int $id
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @property string $name
- * @property string $value
  * @property string $type
  * @property string description
  * @property string section
@@ -144,7 +142,6 @@ class WebchatSetting extends Model
     protected $fillable = [
         'name',
         'type',
-        'value',
         'display_name',
         'display',
         'description',
@@ -155,7 +152,6 @@ class WebchatSetting extends Model
     ];
 
     protected $casts = [
-        'value' => WebchatSettingsValueCast::class,
         'display' => 'boolean'
     ];
 

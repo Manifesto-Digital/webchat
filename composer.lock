@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "aa5e739d5ca008b2d89a2514a3dae478",
+    "content-hash": "a2c44607362eed3be53ee2c64fbd8ac7",
     "packages": [
         {
             "name": "brick/math",
@@ -5532,16 +5532,16 @@
         },
         {
             "name": "opendialogai/core",
-            "version": "1.1.0",
+            "version": "1.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/opendialogai/core.git",
-                "reference": "ca06460161bfd1012f8dcaecea1faeb777fc9693"
+                "reference": "d1a1ec1b902ebd643c0b930397323cab1db19713"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/opendialogai/core/zipball/ca06460161bfd1012f8dcaecea1faeb777fc9693",
-                "reference": "ca06460161bfd1012f8dcaecea1faeb777fc9693",
+                "url": "https://api.github.com/repos/opendialogai/core/zipball/d1a1ec1b902ebd643c0b930397323cab1db19713",
+                "reference": "d1a1ec1b902ebd643c0b930397323cab1db19713",
                 "shasum": ""
             },
             "require": {
@@ -5568,6 +5568,7 @@
                 "phpunit/phpunit": "^9.0",
                 "squizlabs/php_codesniffer": "^3.4"
             },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
@@ -5580,6 +5581,7 @@
                         "OpenDialogAi\\ResponseEngine\\ResponseEngineServiceProvider",
                         "OpenDialogAi\\InterpreterEngine\\InterpreterEngineServiceProvider",
                         "OpenDialogAi\\OperationEngine\\OperationEngineServiceProvider",
+                        "OpenDialogAi\\PlatformEngine\\PlatformEngineServiceProvider",
                         "OpenDialogAi\\AttributeEngine\\AttributeEngineServiceProvider",
                         "OpenDialogAi\\ContextEngine\\ContextEngineServiceProvider",
                         "OpenDialogAi\\ActionEngine\\ActionEngineServiceProvider",
@@ -5604,6 +5606,7 @@
                     "OpenDialogAi\\ResponseEngine\\": "src/ResponseEngine",
                     "OpenDialogAi\\InterpreterEngine\\": "src/InterpreterEngine",
                     "OpenDialogAi\\OperationEngine\\": "src/OperationEngine",
+                    "OpenDialogAi\\PlatformEngine\\": "src/PlatformEngine",
                     "OpenDialogAi\\SensorEngine\\": "src/SensorEngine",
                     "OpenDialogAi\\NlpEngine\\": "src/NlpEngine",
                     "OpenDialogAi\\Core\\Database\\": "database/",
@@ -5617,9 +5620,9 @@
             "description": "The OpenDialog Core package",
             "support": {
                 "issues": "https://github.com/opendialogai/core/issues",
-                "source": "https://github.com/opendialogai/core/tree/1.1.0"
+                "source": "https://github.com/opendialogai/core/tree/1.x"
             },
-            "time": "2021-08-16T14:36:31+00:00"
+            "time": "2021-08-26T14:10:03+00:00"
         },
         {
             "name": "orchestra/testbench",
@@ -8277,7 +8280,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "opendialogai/core": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

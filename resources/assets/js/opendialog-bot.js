@@ -208,9 +208,17 @@ const defaultBootstrapFunctions = {
     if (urlParams.has('callback_id')) {
       callbackId = urlParams.get('callback_id');
     }
+
+    let scenarioId = (window.openDialogSettings.user && window.openDialogSettings.user.custom && window.openDialogSettings.user.custom.selected_scenario) ?
+      window.openDialogSettings.user.custom.selected_scenario : null;
+
+    if (urlParams.has('scenario_id')) {
+      scenarioId = urlParams.get('scenario_id');
+    }
+
     if (preloadedSettings === null) {
       try {
-        let response = await getSettings(url, userId, window.openDialogSettings, callbackId, window.innerWidth);
+        let response = await getSettings(url, scenarioId, userId, window.openDialogSettings, callbackId, window.innerWidth);
         window.openDialogSettings = merge(window.openDialogSettings, response);
 
       } catch (error) {

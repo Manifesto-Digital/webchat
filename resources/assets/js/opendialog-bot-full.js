@@ -14,7 +14,7 @@ if (!dev) {
 }
 
 function showReloadWarning(e) {
-    e.preventDefault(); 
+    e.preventDefault();
     e.returnValue = '';
 }
 
@@ -87,7 +87,7 @@ if (window.openDialogSettings) {
     let callbackId = null;
 
     if (urlParams.has('callback_id')) {
-    callbackId = urlParams.get('callback_id');
+        callbackId = urlParams.get('callback_id');
     }
 
     if (userId) {
@@ -96,7 +96,14 @@ if (window.openDialogSettings) {
       sessionStorage.uuid = uuid.v4();
     }
 
-    getSettings(url, userId, window.openDialogSettings, callbackId, window.innerWidth).then((settings) => {
+    let scenarioId = (window.openDialogSettings.user && window.openDialogSettings.user.custom && window.openDialogSettings.user.custom.selected_scenario) ?
+      window.openDialogSettings.user.custom.selected_scenario : null;
+
+    if (urlParams.has('scenario_id')) {
+        scenarioId = urlParams.get('scenario_id');
+    }
+
+    getSettings(url, scenarioId, userId, window.openDialogSettings, callbackId, window.innerWidth).then((settings) => {
         window.openDialogSettings = merge(window.openDialogSettings, settings);
         window.openDialogSettings = merge(window.openDialogSettings, defaultWebchatSettings);
 
