@@ -24,6 +24,15 @@ class WebchatSettings
     public const RETURNING_USER = 'returning';
 
     /**
+     * @param Request $request
+     * @return mixed
+     */
+    public static function getScenarioIdFromRequest(Request $request)
+    {
+        return $request->get('scenario_id') ?? $request->json('custom_settings.user.custom.selected_scenario');
+    }
+
+    /**
      * Handle the incoming request.
      *
      * @param Request $request
@@ -38,7 +47,7 @@ class WebchatSettings
         /** @var ComponentConfiguration $configuration */
         $configuration = ComponentConfiguration::where([
             'name' => ConfigurationDataHelper::WEBCHAT_PLATFORM,
-            'scenario_id' => $request->get('scenario_id'),
+            'scenario_id' => self::getScenarioIdFromRequest($request),
         ])->first();
 
         if (is_null($configuration)) {
@@ -57,7 +66,7 @@ class WebchatSettings
      */
     private function validateRequest(Request $request)
     {
-        if (!$request->get('scenario_id')) {
+        if (!self::getScenarioIdFromRequest($request)) {
             return 'No scenario_id given.';
         }
 
