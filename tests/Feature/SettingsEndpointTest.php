@@ -15,7 +15,7 @@ use OpenDialogAi\Webchat\WebchatSetting;
 
 class SettingsEndpointTest extends TestCase
 {
-    public function testSettingsApi()
+    public function testSettingsApiWithScenarioInQueryParam()
     {
         $configuration = [
             'general' => [
@@ -39,10 +39,86 @@ class SettingsEndpointTest extends TestCase
 
         $this->createWebchatPlatformConfiguration($configuration);
 
-        $response = $this->json('GET', '/webchat-config?scenario_id=0x000');
+        $response = $this->json('POST', '/webchat-config?scenario_id=0x000');
         $response
             ->assertStatus(200)
             ->assertJson($configuration, true);
+    }
+
+    public function testSettingsApiWithScenarioInRequest()
+    {
+        $configuration = [
+            'general' => [
+                'teamName' => 'OpenDialog Webchat',
+                'open' => true,
+            ],
+            'colours' => [
+                'headerBackground' => '#ffffff',
+                'headerText' => '#000000',
+            ],
+            'comments' => [
+                'commentsName' => 'Comments Tab',
+                'commentsEnabled' => false,
+            ],
+            'messageDelay' => 1000,
+            'testObject' => [
+                'foo' => 'bar',
+                'bee' => 'baz',
+            ]
+        ];
+
+        $this->createWebchatPlatformConfiguration($configuration);
+
+        $response = $this->json('POST', '/webchat-config', [
+            'custom_settings' => [
+                'user' => [
+                    'custom' => [
+                        'email' => 'test@example.com',
+                        'selected_scenario' => '0x000',
+                    ]
+                ]
+            ]
+        ]);
+        $response
+            ->assertStatus(200)
+            ->assertJson($configuration, true);
+    }
+
+    public function testFailureSettingsApiWithNoScenarioGiven()
+    {
+        $configuration = [
+            'general' => [
+                'teamName' => 'OpenDialog Webchat',
+                'open' => true,
+            ],
+            'colours' => [
+                'headerBackground' => '#ffffff',
+                'headerText' => '#000000',
+            ],
+            'comments' => [
+                'commentsName' => 'Comments Tab',
+                'commentsEnabled' => false,
+            ],
+            'messageDelay' => 1000,
+            'testObject' => [
+                'foo' => 'bar',
+                'bee' => 'baz',
+            ]
+        ];
+
+        $this->createWebchatPlatformConfiguration($configuration);
+
+        $response = $this->json('POST', '/webchat-config', [
+            'custom_settings' => [
+                'user' => [
+                    'custom' => [
+                        'email' => 'test@example.com',
+                    ]
+                ]
+            ]
+        ]);
+
+        $response->assertStatus(400);
     }
 
     public function testSettingsApiWithUserIdOngoingUser()
