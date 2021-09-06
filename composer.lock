@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c78a98fe3aef457bf4a2356ece912885",
+    "content-hash": "7f9f18682513041c66f5f98427e6b07d",
     "packages": [
         {
             "name": "brick/math",
@@ -5532,16 +5532,16 @@
         },
         {
             "name": "opendialogai/core",
-            "version": "dev-rc/1.2.0",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/opendialogai/core.git",
-                "reference": "a9dbd11921f58d5a2f8f778259d9a5cb09fa7afb"
+                "reference": "93e9f9d3169adb390d42cb5eac7f7831d34e842f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/opendialogai/core/zipball/a9dbd11921f58d5a2f8f778259d9a5cb09fa7afb",
-                "reference": "a9dbd11921f58d5a2f8f778259d9a5cb09fa7afb",
+                "url": "https://api.github.com/repos/opendialogai/core/zipball/93e9f9d3169adb390d42cb5eac7f7831d34e842f",
+                "reference": "93e9f9d3169adb390d42cb5eac7f7831d34e842f",
                 "shasum": ""
             },
             "require": {
@@ -5619,9 +5619,9 @@
             "description": "The OpenDialog Core package",
             "support": {
                 "issues": "https://github.com/opendialogai/core/issues",
-                "source": "https://github.com/opendialogai/core/tree/rc/1.2.0"
+                "source": "https://github.com/opendialogai/core/tree/1.2.0"
             },
-            "time": "2021-09-02T13:29:04+00:00"
+            "time": "2021-09-02T13:43:17+00:00"
         },
         {
             "name": "orchestra/testbench",
@@ -8279,9 +8279,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "opendialogai/core": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
