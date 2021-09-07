@@ -383,6 +383,9 @@ export default {
             sessionStorage.openDialogSettings = JSON.stringify(
               event.data.loadSettings
             );
+            if (typeof event.data.loadSettings.appKey !== 'undefined') {
+              window.axios.defaults.headers.common['Authorization'] = 'Bearer ' + event.data.loadSettings.appKey;
+            }
             this.$store.dispatch("updateSettings", event.data.loadSettings);
             this.initialiseSettings();
           }
