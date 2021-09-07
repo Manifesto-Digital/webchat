@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a2c44607362eed3be53ee2c64fbd8ac7",
+    "content-hash": "7f9f18682513041c66f5f98427e6b07d",
     "packages": [
         {
             "name": "brick/math",
@@ -5532,16 +5532,16 @@
         },
         {
             "name": "opendialogai/core",
-            "version": "1.x-dev",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/opendialogai/core.git",
-                "reference": "d1a1ec1b902ebd643c0b930397323cab1db19713"
+                "reference": "93e9f9d3169adb390d42cb5eac7f7831d34e842f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/opendialogai/core/zipball/d1a1ec1b902ebd643c0b930397323cab1db19713",
-                "reference": "d1a1ec1b902ebd643c0b930397323cab1db19713",
+                "url": "https://api.github.com/repos/opendialogai/core/zipball/93e9f9d3169adb390d42cb5eac7f7831d34e842f",
+                "reference": "93e9f9d3169adb390d42cb5eac7f7831d34e842f",
                 "shasum": ""
             },
             "require": {
@@ -5568,7 +5568,6 @@
                 "phpunit/phpunit": "^9.0",
                 "squizlabs/php_codesniffer": "^3.4"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
@@ -5620,9 +5619,9 @@
             "description": "The OpenDialog Core package",
             "support": {
                 "issues": "https://github.com/opendialogai/core/issues",
-                "source": "https://github.com/opendialogai/core/tree/1.x"
+                "source": "https://github.com/opendialogai/core/tree/1.2.0"
             },
-            "time": "2021-08-26T14:10:03+00:00"
+            "time": "2021-09-02T13:43:17+00:00"
         },
         {
             "name": "orchestra/testbench",
@@ -8280,9 +8279,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "opendialogai/core": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
