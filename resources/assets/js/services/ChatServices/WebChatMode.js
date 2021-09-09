@@ -60,17 +60,34 @@ function sendMessageReceivedEvent (message, webChatComponent) {
   )
 }
 
+function sendConversationsLogsEvent (logs) {
+  let referrerUrl = '';
+  if (window.self !== window.top) {
+    referrerUrl = document.referrer.match(/^.+:\/\/[^\/]+/)[0];
+  } else {
+    referrerUrl = document.location.origin;
+  }
+
+  window.parent.postMessage(
+    { conversation_logs: { logs: logs } },
+    referrerUrl
+  )
+}
+
 WebChatMode.prototype.sendResponseSuccess = function(response, sentMessage, webChatComponent) {
 
-
   return new Promise((resolve, reject) => {
-    if (response.data instanceof Array) {
+    sendConversationsLogsEvent(response.data.logs);
+
+    let messages = response.data.messages;
+
+    if (messages instanceof Array) {
       let index = 0;
-      let totalMessages = response.data.filter(msg => msg !== false).length;
+      let totalMessages = messages.filter(msg => msg !== false).length;
       let typingMessage;
       let clearCtaText = true;
 
-      response.data.forEach((message, i) => {
+      messages.forEach((message, i) => {
         const messageIndex = index;
 
         if (message && message.type === "cta") {
@@ -203,8 +220,8 @@ WebChatMode.prototype.sendResponseSuccess = function(response, sentMessage, webC
         }
       });
 
-    } else if (response.data) {
-      const message = response.data;
+    } else if (messages) {
+      const message = messages;
 
       if (sentMessage.type === "chat_open") {
         if (message && message.data) {
