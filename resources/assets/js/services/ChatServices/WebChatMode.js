@@ -60,7 +60,7 @@ function sendMessageReceivedEvent (message, webChatComponent) {
   )
 }
 
-function sendConversationsLogsEvent (logs) {
+function sendMetaDataEvent (data) {
   let referrerUrl = '';
   if (window.self !== window.top) {
     referrerUrl = document.referrer.match(/^.+:\/\/[^\/]+/)[0];
@@ -69,7 +69,7 @@ function sendConversationsLogsEvent (logs) {
   }
 
   window.parent.postMessage(
-    { conversation_logs: { logs: logs } },
+    { meta: data },
     referrerUrl
   )
 }
@@ -77,7 +77,7 @@ function sendConversationsLogsEvent (logs) {
 WebChatMode.prototype.sendResponseSuccess = function(response, sentMessage, webChatComponent) {
 
   return new Promise((resolve, reject) => {
-    sendConversationsLogsEvent(response.data.logs);
+    sendMetaDataEvent(response.data.meta);
 
     let messages = response.data.messages;
 
