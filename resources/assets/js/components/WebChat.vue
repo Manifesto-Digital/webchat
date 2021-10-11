@@ -507,7 +507,7 @@ export default {
         const index = this.messageList.indexOf(msg);
         this.messageList.splice(index, 1);
 
-        if (this.messageList[index - 1].type === "author") {
+        if (this.messageList[index - 1] && this.messageList[index - 1].type === "author") {
           this.messageList.splice(index - 1, 1);
         }
       } else if (msg.data.clear_after_interaction) {
