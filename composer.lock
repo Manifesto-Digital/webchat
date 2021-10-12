@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5206758dc850b565029acb47436faed9",
+    "content-hash": "cd632ab6da51c5109308d0553f6631d3",
     "packages": [
         {
             "name": "brick/math",
@@ -5597,16 +5597,16 @@
         },
         {
             "name": "opendialogai/core",
-            "version": "1.3.0",
+            "version": "1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/opendialogai/core.git",
-                "reference": "1aed2a4347c8dc1fff71b36410c8a0dd44aa3e88"
+                "reference": "e12c496d6439489e9631c24319ee43cbaee5cf9c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/opendialogai/core/zipball/1aed2a4347c8dc1fff71b36410c8a0dd44aa3e88",
-                "reference": "1aed2a4347c8dc1fff71b36410c8a0dd44aa3e88",
+                "url": "https://api.github.com/repos/opendialogai/core/zipball/e12c496d6439489e9631c24319ee43cbaee5cf9c",
+                "reference": "e12c496d6439489e9631c24319ee43cbaee5cf9c",
                 "shasum": ""
             },
             "require": {
@@ -5619,6 +5619,7 @@
                 "laravel/sanctum": "^2.11",
                 "php": "^7.4.0 || ^8.0",
                 "php-ds/php-ds": "^1.2",
+                "spatie/laravel-event-sourcing": "^4.10.2",
                 "symfony/property-access": "^5.2",
                 "symfony/serializer": "^5.2",
                 "symfony/yaml": "^5.2"
@@ -5685,9 +5686,9 @@
             "description": "The OpenDialog Core package",
             "support": {
                 "issues": "https://github.com/opendialogai/core/issues",
-                "source": "https://github.com/opendialogai/core/tree/1.3.0"
+                "source": "https://github.com/opendialogai/core/tree/1.5.0"
             },
-            "time": "2021-09-08T15:09:49+00:00"
+            "time": "2021-10-12T11:10:51+00:00"
         },
         {
             "name": "orchestra/testbench",
@@ -7811,6 +7812,158 @@
                 }
             ],
             "time": "2020-09-28T06:39:44+00:00"
+        },
+        {
+            "name": "spatie/laravel-event-sourcing",
+            "version": "v4.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-event-sourcing.git",
+                "reference": "ce5f22b39092914e9217b49fb1fc1d6ee12aea08"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-event-sourcing/zipball/ce5f22b39092914e9217b49fb1fc1d6ee12aea08",
+                "reference": "ce5f22b39092914e9217b49fb1fc1d6ee12aea08",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "illuminate/console": "^6.0|^7.0|^8.0",
+                "illuminate/database": "^6.0|^7.0|^8.0",
+                "illuminate/events": "^6.0|^7.0|^8.0",
+                "illuminate/support": "^6.0|^7.0|^8.0",
+                "league/flysystem": "^1.1.3",
+                "php": "^8.0|^7.4",
+                "phpdocumentor/reflection-docblock": "^5.2",
+                "spatie/laravel-schemaless-attributes": "^1.8",
+                "symfony/finder": "^4.2|^5.0",
+                "symfony/property-access": "^4.0|^5.0",
+                "symfony/property-info": "^5.2",
+                "symfony/serializer": "^5.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.4",
+                "orchestra/testbench": "^4.0|^5.0|^6.0",
+                "phpunit/phpunit": "^9.4",
+                "spatie/phpunit-snapshot-assertions": "^4.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Spatie\\EventSourcing\\EventSourcingServiceProvider"
+                    ],
+                    "aliases": {
+                        "Projectionist": "Spatie\\EventSourcing\\Facades\\EventSourcing"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\EventSourcing\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "The easiest way to get started with event sourcing in Laravel",
+            "homepage": "https://github.com/spatie/laravel-event-sourcing",
+            "keywords": [
+                "aggregates",
+                "event",
+                "laravel-event-sourcing",
+                "projectors",
+                "reactors",
+                "sourcing",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/laravel-event-sourcing/issues",
+                "source": "https://github.com/spatie/laravel-event-sourcing/tree/v4"
+            },
+            "funding": [
+                {
+                    "url": "https://spatie.be/open-source/support-us",
+                    "type": "custom"
+                }
+            ],
+            "time": "2021-06-15T17:18:22+00:00"
+        },
+        {
+            "name": "spatie/laravel-schemaless-attributes",
+            "version": "1.8.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-schemaless-attributes.git",
+                "reference": "e3037a509683fe7fc0a2681b6f404b90aeffdaf0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-schemaless-attributes/zipball/e3037a509683fe7fc0a2681b6f404b90aeffdaf0",
+                "reference": "e3037a509683fe7fc0a2681b6f404b90aeffdaf0",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "^5.6|^6.0|^7.0|^8.0",
+                "illuminate/support": "^5.6|^6.0|^7.0|^8.0",
+                "php": "^7.3|^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^3.6|^4.0|^5.0|^6.0",
+                "phpunit/phpunit": "^7.0|^8.0|^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Spatie\\SchemalessAttributes\\SchemalessAttributesServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\SchemalessAttributes\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Add schemaless attributes to Eloquent models",
+            "homepage": "https://github.com/spatie/laravel-schemaless-attributes",
+            "keywords": [
+                "laravel-schemaless-attributes",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/laravel-schemaless-attributes/issues",
+                "source": "https://github.com/spatie/laravel-schemaless-attributes/tree/1.8.3"
+            },
+            "funding": [
+                {
+                    "url": "https://spatie.be/open-source/support-us",
+                    "type": "custom"
+                }
+            ],
+            "time": "2020-11-04T13:21:43+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",
