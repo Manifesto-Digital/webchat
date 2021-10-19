@@ -84,6 +84,7 @@
         :hide-datetime-message="hideDatetimeMessage"
         :hide-message-time="hideMessageTime"
         :hide-typing-indicator-on-internal-messages="hideTypingIndOnInternalMessages"
+        :typing-indicator-on-send="typingIndicatorOnSend"
         :is-expand="isExpand"
         :is-mobile="isMobile"
         :show-history="showHistory"
@@ -159,6 +160,7 @@ export default {
       hideDatetimeMessage: false,
       hideMessageTime: false,
       hideTypingIndOnInternalMessages: false,
+      typingIndicatorOnSend: false,
       ipAddressInitialised: false,
       isExpand: false,
       isMinimized: true,
@@ -646,6 +648,11 @@ export default {
         if (general.hideTypingIndicatorOnInternalMessages) {
           this.hideTypingIndOnInternalMessages =
             general.hideTypingIndicatorOnInternalMessages;
+        }
+
+        if (general.typingIndicatorOnSend) {
+          this.typingIndicatorOnSend =
+              general.typingIndicatorOnSend;
         }
 
         if (general.messageAnimation) {

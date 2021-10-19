@@ -89,6 +89,15 @@ return [
             WebchatSetting::DESCRIPTION => 'Whether to hide the typing indicator in between bot messages'
         ],
 
+        WebchatSetting::TYPING_INDICATOR_ON_SEND => [
+            WebchatSetting::TYPE => WebchatSetting::BOOLEAN,
+            WebchatSetting::SECTION => 'General Settings',
+            WebchatSetting::SUBSECTION => 'Typing Event',
+            WebchatSetting::DISPLAY_NAME => 'Show the typing indicator on message send',
+            WebchatSetting::DESCRIPTION => 'Whether to hide the typing indicator is turned on when the message is sent or when
+            the response is received'
+        ],
+
         WebchatSetting::CHATBOT_CSS_PATH => [
             WebchatSetting::DISPLAY_NAME => 'Link to CSS file',
             WebchatSetting::DESCRIPTION => 'CSS for the iFrame chatbot',

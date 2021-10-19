@@ -114,6 +114,7 @@ export default {
     hideDatetimeMessage: Boolean,
     hideMessageTime: Boolean,
     hideTypingIndicatorOnInternalMessages: Boolean,
+    typingIndicatorOnSend: Boolean,
     isExpand: Boolean,
     isMobile: Boolean,
     messageAnimation: Boolean,
@@ -863,8 +864,8 @@ export default {
           this.checkHideChat();
         });
     },
-    newAuthorMessage(message) {
-      if (message.author === "them") {
+    newAuthorMessage(message, forceThem = false) {
+      if (message.author === "them" || forceThem) {
         const authorMsg = {
           type: "author",
           author: "them",

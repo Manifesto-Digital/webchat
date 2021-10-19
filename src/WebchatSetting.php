@@ -73,6 +73,7 @@ class WebchatSetting extends Model
 
     public const TYPING_INDICATOR_STYLE = 'typingIndicatorStyle';
     public const TYPING_INDICATOR_TYPEWRITER_STYLE = 'typewriter';
+    public const TYPING_INDICATOR_ON_SEND = 'typingIndicatorOnSend';
 
     // Colours
     public const COLOURS                          = 'colours';
