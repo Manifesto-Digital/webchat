@@ -127,6 +127,7 @@ function authorAndTypingMessage (webChatComponent, message) {
       }
     }
     webChatComponent.messageList.push(typingMessage)
+    return typingMessage
   } else {
     // Otherwise, fetch the previous message as the typing message
     return webChatComponent.messageList[webChatComponent.messageList.length - 1]
