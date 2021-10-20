@@ -26,16 +26,14 @@
 </div>
 
 <script>
-    window.openDialogSettings = {
-        url: "{{ env("APP_URL") }}",
-        css_version: "{{ env("CSS_VERSION", "v1") }}",
+      window.openDialogSettings = {
+        url: "{{ URL::to('/') }}",
         user: {
-            first_name: '{!! app('request')->input('first_name') ? app('request')->input('first_name') : (auth()->user() ? auth()->user()->name : '') !!}',
-            last_name: '{!! app('request')->input('last_name') ? app('request')->input('last_name') : '' !!}',
-            email: '{!! app('request')->input('email') ? app('request')->input('email') : (auth()->user() ? auth()->user()->email : '') !!}',
-            external_id: '{!! app('request')->input('external_id') ? app('request')->input('external_id') : (auth()->user() ? auth()->user()->id : '') !!}',
+          custom: {
+            selected_scenario: "{{request()->get('selected_scenario')}}"
+          }
         },
-    };
+      };
 </script>
 
 <script src="/vendor/webchat/js/app.js?{{env("JS_VERSION", "v1")}}"></script>
