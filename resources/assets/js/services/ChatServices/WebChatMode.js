@@ -93,6 +93,46 @@ function sendMetaDataEvent (data) {
   )
 }
 
+/*
+ * If the message is set to hide avatar, look back 2 messages and if that is an avatar, remove it
+ */
+function removeAvatar (webChatComponent, message) {
+  if (webChatComponent.typingIndicatorOnSend && message.data.hideavatar) {
+    const avatarMessage = webChatComponent.messageList[webChatComponent.messageList.length - 2]
+    if (avatarMessage.type === 'author') {
+      webChatComponent.messageList.splice(webChatComponent.messageList.length - 2, 1)
+    }
+  }
+}
+
+/*
+ * Logic for adding author and typing message based on whether they have already been added and the current message
+ */
+function authorAndTypingMessage (webChatComponent, message) {
+  if ((webChatComponent.useBotName || webChatComponent.useBotAvatar) && !message.data.hideavatar) {
+    if (!webChatComponent.typingIndicatorOnSend) { // Only add an author message if we haven't already
+      const authorMsg = webChatComponent.newAuthorMessage(message)
+      webChatComponent.messageList.push(authorMsg)
+    }
+  }
+
+  // Only add typing message if one has not been added on send
+  if (!webChatComponent.typingIndicatorOnSend) {
+    const typingMessage = {
+      author: 'them',
+      type: 'typing',
+      mode: webChatComponent.modeData.mode,
+      data: {
+        animate: webChatComponent.messageAnimation
+      }
+    }
+    webChatComponent.messageList.push(typingMessage)
+  } else {
+    // Otherwise, fetch the previous message as the typing message
+    return webChatComponent.messageList[webChatComponent.messageList.length - 1]
+  }
+}
+
 WebChatMode.prototype.sendResponseSuccess = function(response, sentMessage, webChatComponent) {
   return new Promise((resolve, reject) => {
     sendMetaDataEvent(response.data.meta);
@@ -107,6 +147,9 @@ WebChatMode.prototype.sendResponseSuccess = function(response, sentMessage, webC
 
       messages.forEach((message, i) => {
         const messageIndex = index;
+
+        // If the message hides avatar, and we added one on send, go back and remove it
+        removeAvatar(webChatComponent, message)
 
         if (message && message.type === "cta") {
           if (clearCtaText) {
@@ -144,27 +187,7 @@ WebChatMode.prototype.sendResponseSuccess = function(response, sentMessage, webC
 
         } else {
           if (messageIndex === 0) {
-            if ((webChatComponent.useBotName || webChatComponent.useBotAvatar) && !message.data.hideavatar) {
-              if (!webChatComponent.typingIndicatorOnSend) { // Only add an author message if we haven't already
-                const authorMsg = webChatComponent.newAuthorMessage(message);
-                webChatComponent.messageList.push(authorMsg);
-              }
-            }
-
-            // Only add typing message if one has not been added on send
-            if (!webChatComponent.typingIndicatorOnSend) {
-              typingMessage = {
-                author: "them",
-                type: "typing",
-                mode: webChatComponent.modeData.mode,
-                data: {
-                  animate: webChatComponent.messageAnimation
-                }
-              };
-              webChatComponent.messageList.push(typingMessage);
-            } else {
-              typingMessage = webChatComponent.messageList[webChatComponent.messageList.length - 1]
-            }
+            typingMessage = authorAndTypingMessage(webChatComponent, message)
           }
 
           setTimeout(() => {
@@ -258,30 +281,13 @@ WebChatMode.prototype.sendResponseSuccess = function(response, sentMessage, webC
     } else if (messages) {
       const message = messages;
 
+      removeAvatar(webChatComponent, message)
+
       if (sentMessage.type === "chat_open") {
         if (message && message.data) {
           let typingMessage;
 
-          if ((webChatComponent.useBotName || webChatComponent.useBotAvatar) && !message.data.hideavatar) {
-            if (!webChatComponent.typingIndicatorOnSend) {
-              const authorMsg = webChatComponent.newAuthorMessage(message);
-              webChatComponent.messageList.push(authorMsg);
-            }
-          }
-
-          if (!webChatComponent.typingIndicatorOnSend) {
-            typingMessage = {
-              author: "them",
-              type: "typing",
-              mode: webChatComponent.modeData.mode,
-              data: {
-                animate: webChatComponent.messageAnimation
-              }
-            };
-            webChatComponent.messageList.push(typingMessage);
-          } else {
-            typingMessage = webChatComponent.messageList[webChatComponent.messageList.length - 1];
-          }
+          typingMessage = authorAndTypingMessage(webChatComponent, message)
 
           setTimeout(() => {
             webChatComponent.$emit("newMessage", message);
@@ -312,26 +318,7 @@ WebChatMode.prototype.sendResponseSuccess = function(response, sentMessage, webC
         let typingMessage;
 
         if (message.data) {
-          if ((webChatComponent.useBotName || webChatComponent.useBotAvatar) && !message.data.hideavatar) {
-            if (!webChatComponent.typingIndicatorOnSend) {
-              const authorMsg = webChatComponent.newAuthorMessage(message);
-              webChatComponent.messageList.push(authorMsg);
-            }
-          }
-
-          if (!webChatComponent.typingIndicatorOnSend) {
-            typingMessage = {
-              author: "them",
-              type: "typing",
-              mode: webChatComponent.modeData.mode,
-              data: {
-                animate: webChatComponent.messageAnimation
-              }
-            };
-            webChatComponent.messageList.push(typingMessage);
-          } else {
-            typingMessage = webChatComponent.messageList[webChatComponent.messageList.length - 1];
-          }
+          typingMessage = authorAndTypingMessage(webChatComponent, message)
         }
 
         setTimeout(() => {
