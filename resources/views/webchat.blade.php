@@ -34,6 +34,10 @@
           }
         },
       };
+
+      if ( "{{ request()->get('key') }}" ) {
+        window.openDialogSettings.appKey = "{{  request()->get('key') }}"
+      }
 </script>
 
 <script src="/vendor/webchat/js/app.js?{{env("JS_VERSION", "v1")}}"></script>
