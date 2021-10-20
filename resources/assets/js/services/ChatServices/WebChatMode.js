@@ -97,7 +97,7 @@ function sendMetaDataEvent (data) {
  * If the message is set to hide avatar, look back 2 messages and if that is an avatar, remove it
  */
 function removeAvatar (webChatComponent, message) {
-  if (webChatComponent.typingIndicatorOnSend && message.data.hideavatar) {
+  if (webChatComponent.typingIndicatorOnSend && message.data && message.data.hideavatar) {
     const avatarMessage = webChatComponent.messageList[webChatComponent.messageList.length - 2]
     if (avatarMessage.type === 'author') {
       webChatComponent.messageList.splice(webChatComponent.messageList.length - 2, 1)
