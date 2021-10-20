@@ -111,6 +111,11 @@ workflows:
       - php_tests
       - npm_build
       - push_assets:
+          filters:
+            tags:
+              ignore: /.*/
+            branches:
+              only: /.*/
           requires:
             - php_codesniff
             - php_tests

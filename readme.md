@@ -50,7 +50,7 @@ To ignore local changes to built assets, please run:
 
 To build assets whist developing follow this process:
 
-+ Change to the `vendor/opendialog/webchat-frontend` directory and run `npm install; npm run dev` (for development)
++ Change to the `vendor/opendialog/webchat-frontend` directory and run `yarn install; yarn dev` (for development)
 
 + Run `php artisan vendor:publish --tag=public --force` to move the newly built assets into the parent application to be
 served
