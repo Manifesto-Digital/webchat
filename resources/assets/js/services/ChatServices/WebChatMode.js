@@ -134,6 +134,21 @@ function authorAndTypingMessage (webChatComponent, message) {
   }
 }
 
+/*
+ * For non-messages, clean up the typing and author messages that were turned on when sending
+ */
+function removeTypingAndAvatar (webChatComponent) {
+  let previousMessage = webChatComponent.messageList[webChatComponent.messageList.length - 1]
+  if (previousMessage.type === 'typing') {
+    webChatComponent.messageList.splice(webChatComponent.messageList.length - 1, 1)
+  }
+
+  previousMessage = webChatComponent.messageList[webChatComponent.messageList.length - 1]
+  if (previousMessage.type === 'author') {
+    webChatComponent.messageList.splice(webChatComponent.messageList.length - 1, 1)
+  }
+}
+
 WebChatMode.prototype.sendResponseSuccess = function(response, sentMessage, webChatComponent) {
   return new Promise((resolve, reject) => {
     sendMetaDataEvent(response.data.meta);
@@ -150,7 +165,9 @@ WebChatMode.prototype.sendResponseSuccess = function(response, sentMessage, webC
         const messageIndex = index;
 
         // If the message hides avatar, and we added one on send, go back and remove it
-        removeAvatar(webChatComponent, message)
+        if (i === 0) {
+          removeAvatar(webChatComponent, message)
+        }
 
         if (message && message.type === "cta") {
           if (clearCtaText) {
@@ -174,16 +191,7 @@ WebChatMode.prototype.sendResponseSuccess = function(response, sentMessage, webC
           }
 
           if (webChatComponent.typingIndicatorOnSend) {
-            // For non-messages, clean up the typing and author messages that were turned on when sending
-            let previousMessage = webChatComponent.messageList[webChatComponent.messageList.length - 1]
-            if (previousMessage.type === 'typing') {
-              webChatComponent.messageList.splice(webChatComponent.messageList.length - 1, 1)
-            }
-
-            previousMessage = webChatComponent.messageList[webChatComponent.messageList.length - 1]
-            if (previousMessage.type === 'author') {
-              webChatComponent.messageList.splice(webChatComponent.messageList.length - 1, 1)
-            }
+            removeTypingAndAvatar(webChatComponent)
           }
 
         } else {
