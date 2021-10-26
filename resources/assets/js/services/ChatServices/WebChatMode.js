@@ -9,8 +9,8 @@ let WebChatMode = function() {
 };
 
 WebChatMode.prototype.sendRequest = function(message, webChatComponent) {
-    // Add an author message and typing message on send if typingIndicatorOnSend is set to true
-    if (webChatComponent.typingIndicatorOnSend) {
+    // Add author and typing message on send if typingIndicatorOnSend is set to true and this is not a url click
+    if (webChatComponent.typingIndicatorOnSend && message.type !== "url_click") {
       if (webChatComponent.useBotName || webChatComponent.useBotAvatar) {
         const authorMsg = webChatComponent.newAuthorMessage(message, true)
         webChatComponent.messageList.push(authorMsg)
