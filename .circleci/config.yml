@@ -50,7 +50,7 @@ jobs:
 
       - run: phpdbg -qrr ./vendor/bin/phpunit --coverage-html build/coverage-report -d memory_limit=8192M
 
-  npm_build:
+  yarn_build:
     docker:
       - image: circleci/node:14
 
@@ -61,17 +61,17 @@ jobs:
 
       - restore_cache:
           keys:
-            - v1-node-dependencies-{{ checksum "package-lock.json" }}
+            - v1-node-dependencies-{{ checksum "yarn.lock" }}
             - v1-node-dependencies-
 
-      - run: npm install
+      - run: yarn install
 
       - save_cache:
           paths:
             - ./node_modules
-          key: v1-node-dependencies-{{ checksum "package-lock.json" }}
+          key: v1-node-dependencies-{{ checksum "yarn.lock" }}
 
-      - run: npm run prod
+      - run: yarn run prod
 
   push_assets:
     docker:
@@ -84,17 +84,17 @@ jobs:
 
       - restore_cache:
           keys:
-            - v1-node-dependencies-{{ checksum "package-lock.json" }}
+            - v1-node-dependencies-{{ checksum "yarn.lock" }}
             - v1-node-dependencies-
 
-      - run: npm install
+      - run: yarn install
 
       - save_cache:
           paths:
             - ./node_modules
-          key: v1-node-dependencies-{{ checksum "package-lock.json" }}
+          key: v1-node-dependencies-{{ checksum "yarn.lock" }}
 
-      - run: npm run prod
+      - run: yarn run prod
 
       - run: git config --global user.email "hello@greenshootlabs.com"
       - run: git config --global user.name "CI commit"
@@ -109,9 +109,14 @@ workflows:
     jobs:
       - php_codesniff
       - php_tests
-      - npm_build
+      - yarn_build
       - push_assets:
+          filters:
+            tags:
+              ignore: /.*/
+            branches:
+              only: /.*/
           requires:
             - php_codesniff
             - php_tests
-            - npm_build
+            - yarn_build
