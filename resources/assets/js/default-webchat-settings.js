@@ -26,6 +26,7 @@ export default {
         "showHeaderButtonsOnFullPageMessages": false,
         "messageAnimation": false,
         "hideTypingIndicatorOnInternalMessages": false,
+        "typingIndicatorOnSend": false,
         "scrollToFirstNewMessage": false,
         "messageDelay": 500,
         "logo": "/images/logo.svg",
