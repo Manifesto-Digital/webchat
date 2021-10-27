@@ -1,7 +1,7 @@
 {
-    "/public/js/app.js": "/public/js/app.js?id=94621e1566119f3656f8",
-    "/public/css/main.css": "/public/css/main.css?id=5cb221ca5758290f781e",
-    "/public/css/app-iframe.css": "/public/css/app-iframe.css?id=47e60981beb253aeaac9",
-    "/public/js/opendialog-bot.js": "/public/js/opendialog-bot.js?id=3c871d7330628a81e0df",
-    "/public/js/opendialog-bot-full.js": "/public/js/opendialog-bot-full.js?id=87fbe6f4fd965da6200b"
+    "/public/js/app.js": "/public/js/app.js",
+    "/public/css/main.css": "/public/css/main.css",
+    "/public/css/app-iframe.css": "/public/css/app-iframe.css",
+    "/public/js/opendialog-bot.js": "/public/js/opendialog-bot.js",
+    "/public/js/opendialog-bot-full.js": "/public/js/opendialog-bot-full.js"
 }
