@@ -31,6 +31,7 @@
         :on-full-page-form-input-submit="onFullPageFormInputSubmit"
         :on-full-page-form-input-cancel="onFullPageFormInputCancel"
         :on-full-page-rich-input-submit="onFullPageRichInputSubmit"
+        :on-long-text-input-submit="onLongTextInputSubmit"
         :message-list="messageList"
         :on-button-click="onButtonClick"
         :on-form-button-click="onFormButtonClick"
@@ -53,9 +54,11 @@
         :placeholder="placeholder"
         :confirmation-message="confirmationMessage"
         :initial-text="initialText"
+        :headerText="headerText"
         :mode-data="modeData"
         :fp-form-input-message="fpFormInputMessage"
         :fp-rich-input-message="fpRichInputMessage"
+        :long-text-input-message="longTextInputMessage"
         :cta-text="ctaText"
         :hide-message-time="hideMessageTime"
         @vbc-user-input-focus="userInputFocus"
@@ -182,6 +185,7 @@ export default {
       ctaText: [],
       fpFormInputMessage: {},
       fpRichInputMessage: {},
+      longTextInputMessage: {},
       headerHeight: 0,
       headerText: "",
       id: "",
@@ -425,12 +429,13 @@ export default {
       const msgToSend = msg;
       if (
         this.messageList.length &&
-        this.messageList[this.messageList.length - 1].type === "longtext"
+        this.messageList[this.messageList.length - 1].type === "long_text"
       ) {
         msgToSend.type = "longtext_response";
         msgToSend.callback_id = this.messageList[
           this.messageList.length - 1
         ].data.callback_id;
+        this.showMessages = true;
       }
 
       this.sendMessage(msgToSend);
@@ -854,6 +859,10 @@ export default {
               if (currentMessage.type === "fp-rich") {
                 this.showFullPageRichInputMessage(currentMessage);
               }
+
+              if (currentMessage.type === "long_text") {
+                this.showLongTextInputMessage(currentMessage);
+              }
             }
 
             currentMessage.mode = this.modeData.mode;
@@ -929,6 +938,7 @@ export default {
       this.showMessages = false;
       this.showFullPageRichInput = false;
       this.showFullPageFormInput = true;
+      this.showLongTextInput = false;
     },
     showFullPageRichInputMessage(message) {
       this.fpRichInputMessage = message;
@@ -936,6 +946,15 @@ export default {
       this.showMessages = false;
       this.showFullPageFormInput = false;
       this.showFullPageRichInput = true;
+      this.showLongTextInput = false;
+    },
+    showLongTextInputMessage(message) {
+      this.longTextInputMessage = message;
+
+      this.showMessages = false;
+      this.showFullPageFormInput = false;
+      this.showFullPageRichInput = false;
+      this.showLongTextInput = true;
     },
     setChatMode(data) {
       this.$emit("setChatMode", data);

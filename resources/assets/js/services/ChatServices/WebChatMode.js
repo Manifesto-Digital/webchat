@@ -27,7 +27,6 @@ WebChatMode.prototype.sendRequest = function(message, webChatComponent) {
       webChatComponent.messageList.push(typingMessage)
     }
 
-
     if (
       message.type === "chat_open" ||
       message.type === "url_click" ||
@@ -252,9 +251,14 @@ WebChatMode.prototype.sendResponseSuccess = function(response, sentMessage, webC
               webChatComponent.showFullPageRichInputMessage(message);
             }
 
-            if (message.type !== "fp-form" && message.type !== "fp-rich") {
+            if (message.type === "long_text") {
+              webChatComponent.showLongTextInputMessage(message);
+            }
+
+            if (message.type !== "fp-form" && message.type !== "fp-rich" && message.type !== "long_text") {
               webChatComponent.showFullPageFormInput = false;
               webChatComponent.showFullPageRichInput = false;
+              webChatComponent.showLongTextInput = false;
               webChatComponent.showMessages = true;
             }
 
@@ -314,6 +318,10 @@ WebChatMode.prototype.sendResponseSuccess = function(response, sentMessage, webC
               webChatComponent.showFullPageRichInputMessage(message);
             }
 
+            if (message.type === "long_text") {
+              webChatComponent.showLongTextInputMessage(message);
+            }
+
             webChatComponent.contentEditable = !message.data.disable_text;
 
             resolve(webChatComponent.messageList)
@@ -366,13 +374,15 @@ WebChatMode.prototype.sendResponseSuccess = function(response, sentMessage, webC
             webChatComponent.showFullPageRichInputMessage(message);
           }
 
-          if (message.type !== "fp-form" && message.type !== "fp-rich") {
+          if (message.type !== "fp-form" && message.type !== "fp-rich" && message.type !== "long_text") {
             webChatComponent.showFullPageFormInput = false;
             webChatComponent.showFullPageRichInput = false;
+            webChatComponent.showLongTextInput = false;
             webChatComponent.showMessages = true;
           }
 
-          if (message.type === "longtext") {
+          if (message.type === "long_text") {
+            webChatComponent.showLongTextInputMessage(message);
             if (message.data.character_limit) {
               webChatComponent.maxInputCharacters = message.data.character_limit;
             }

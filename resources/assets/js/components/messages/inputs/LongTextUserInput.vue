@@ -5,7 +5,7 @@
         <span>{{ confirmationMessage }}</span>
       </template>
       <template v-else>
-        <span>{{ headerText }}</span>
+        <p>{{ headerText }}</p>
       </template>
     </div>
     <form class="od-long-user-input__input" :class="{active: inputActive}">
@@ -177,6 +177,7 @@ export default {
   .od-long-user-input--message {
     padding: 25px 15px;
     background-color: white;
+    white-space: pre-line;
   }
 
   .od-long-user-input--text {
@@ -195,7 +196,6 @@ export default {
     line-height: 1.33;
     white-space: pre-wrap;
     word-wrap: break-word;
-    color: #565867;
     -webkit-font-smoothing: antialiased;
     overflow: scroll;
     bottom: 0;
@@ -214,7 +214,7 @@ export default {
   .od-long-user-input--buttons {
     position: absolute;
     right: 0;
-    bottom: 10px;
+    bottom: 30px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -240,7 +240,7 @@ export default {
   .od-long-user-input--button button {
     cursor: pointer;
     color: white;
-    background-color: #4e8cff;
+    background: var(--od-button-background);
     border-radius: 15px;
     border: none;
     font-size: 14px;
