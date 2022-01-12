@@ -415,6 +415,12 @@ WebChatMode.prototype.sendResponseSuccess = function(response, sentMessage, webC
             webChatComponent.showMessages = false;
           }
 
+          if (message.data.attribute_name) {
+            webChatComponent.attributeName = message.data.attribute_name;
+          } else {
+            webChatComponent.attributeName = null;
+          }
+
           resolve(webChatComponent.messageList)
         }, webChatComponent.messageDelay);
         sendMessageReceivedEvent(message, webChatComponent);

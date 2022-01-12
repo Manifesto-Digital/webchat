@@ -147,10 +147,6 @@ export default {
       type: Function,
       required: true
     },
-    onLongTextInputSubmit: {
-      type: Function,
-      required: true
-    },
     onClose: {
       type: Function,
       required: true

@@ -31,7 +31,6 @@
         :on-full-page-form-input-submit="onFullPageFormInputSubmit"
         :on-full-page-form-input-cancel="onFullPageFormInputCancel"
         :on-full-page-rich-input-submit="onFullPageRichInputSubmit"
-        :on-long-text-input-submit="onLongTextInputSubmit"
         :message-list="messageList"
         :on-button-click="onButtonClick"
         :on-form-button-click="onFormButtonClick"
@@ -205,6 +204,7 @@ export default {
       chatbotAvatar: this.chatbotAvatarPath,
       chatMode: "webchat",
       canRestart: true,
+      attributeName: null
     };
   },
   watch: {
@@ -344,6 +344,7 @@ export default {
       }
     },
     sendMessage(msg) {
+      console.log('preparing')
       const newMsg = msg;
 
       newMsg.mode = this.modeData.mode;
@@ -355,6 +356,10 @@ export default {
       newMsg.data.time = moment()
         .tz("UTC")
         .format("hh:mm:ss A");
+
+      if (this.attributeName) {
+        newMsg.data.callback_value = `${this.attributeName}.${newMsg.data.text}`
+      }
 
       newMsg.user_id = this.user.email ? this.user.email : this.$store.state.uuid;
       newMsg.user = this.user;
