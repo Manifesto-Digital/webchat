@@ -2,7 +2,6 @@
 
 namespace OpenDialogAi\Webchat;
 
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
 use OpenDialogAi\Core\Console\Commands\ComponentSettings;
 use OpenDialogAi\Core\ComponentSetting;
