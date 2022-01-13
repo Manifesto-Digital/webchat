@@ -2428,12 +2428,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/opendialogai/core.git",
-                "reference": "ac2f113e9e875c59d0f3a4687bdd5ecb4f1be051"
+                "reference": "4198f46682dd1265abe9b0c4d525bad8d7a5be9f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/opendialogai/core/zipball/ac2f113e9e875c59d0f3a4687bdd5ecb4f1be051",
-                "reference": "ac2f113e9e875c59d0f3a4687bdd5ecb4f1be051",
+                "url": "https://api.github.com/repos/opendialogai/core/zipball/4198f46682dd1265abe9b0c4d525bad8d7a5be9f",
+                "reference": "4198f46682dd1265abe9b0c4d525bad8d7a5be9f",
                 "shasum": ""
             },
             "require": {
@@ -2516,7 +2516,7 @@
                 "issues": "https://github.com/opendialogai/core/issues",
                 "source": "https://github.com/opendialogai/core/tree/OPNDLG-1335--generalise-setting"
             },
-            "time": "2022-01-13T19:14:38+00:00"
+            "time": "2022-01-13T19:27:25+00:00"
         },
         {
             "name": "opis/closure",
