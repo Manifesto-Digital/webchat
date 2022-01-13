@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1f80301fc0605c95644c199cf11e7955",
+    "content-hash": "2b69a7520fe95733b2d53bcfe0c8519f",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -2424,11 +2424,17 @@
         },
         {
             "name": "opendialogai/core",
-            "version": "1.x-dev",
+            "version": "dev-OPNDLG-1335--generalise-setting",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/opendialogai/core.git",
+                "reference": "ac2f113e9e875c59d0f3a4687bdd5ecb4f1be051"
+            },
             "dist": {
-                "type": "path",
-                "url": "../core",
-                "reference": "2f1df4e719901cfeae290c0ea90513078763373d"
+                "type": "zip",
+                "url": "https://api.github.com/repos/opendialogai/core/zipball/ac2f113e9e875c59d0f3a4687bdd5ecb4f1be051",
+                "reference": "ac2f113e9e875c59d0f3a4687bdd5ecb4f1be051",
+                "shasum": ""
             },
             "require": {
                 "aws/aws-sdk-php": "^3.198",
@@ -2501,21 +2507,16 @@
                     "OpenDialogAi\\Core\\Tests\\": "Tests/"
                 }
             },
-            "scripts": {
-                "test": [
-                    "./vendor/bin/phpunit"
-                ],
-                "cs": [
-                    "./vendor/bin/phpcbf --standard=PSR12 --report=full src/"
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "Apache-2.0"
             ],
             "description": "The OpenDialog Core package",
-            "transport-options": {
-                "relative": true
-            }
+            "support": {
+                "issues": "https://github.com/opendialogai/core/issues",
+                "source": "https://github.com/opendialogai/core/tree/OPNDLG-1335--generalise-setting"
+            },
+            "time": "2022-01-13T19:14:38+00:00"
         },
         {
             "name": "opis/closure",

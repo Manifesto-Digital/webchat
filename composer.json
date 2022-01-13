@@ -13,7 +13,7 @@
     "require": {
         "php": "^7.4 || ^8.0",
         "genealabs/laravel-caffeine": "^8.0",
-        "opendialogai/core": "OPNDLG-1335--generalise-setting"
+        "opendialogai/core": "dev-OPNDLG-1335--generalise-setting"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.0",
