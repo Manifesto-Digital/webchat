@@ -698,24 +698,6 @@ export default {
           );
       }
     },
-    workoutCallback() {
-      // Default
-      let callbackId = "WELCOME";
-      const urlParams = new URLSearchParams(window.location.search);
-
-      // If the url has a callback id present, use that
-      if (urlParams.has("callback_id")) {
-          callbackId = urlParams.get("callback_id");
-      } else {
-          // Check if the url matches one in the callback map
-          this.callbackMap.forEach((url, idx) => {
-              if (this.parentUrl.match(this.wildcardToRegExp(url))) {
-                  callbackId = this.callbackMap[idx];
-              }
-          });
-      }
-      return callbackId;
-    },
     wildcardToRegExp(string) {
       return new RegExp(
         `^${string
@@ -742,12 +724,21 @@ export default {
       }
     },
     sendChatOpenMessage() {
-      const callback = this.openIntent;
+      if (this.openIntent) { // The open intent is conditional based on the user type and config
+        let callbackId = this.openIntent;
+        let escalating = false;
 
-      if (callback) {
+        // If the url has a callback id present, use that
+        let urlParams = new URLSearchParams(window.location.search)
+        if (urlParams.has("callback_id")) {
+          callbackId = urlParams.get("callback_id");
+          escalating = true;
+        }
+
         const message = {
           type: "chat_open",
-          callback_id: callback,
+          callback_id: callbackId,
+          escalating: escalating,
           data: {
             value: this.parentUrl
           }
