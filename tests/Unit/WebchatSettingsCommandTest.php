@@ -11,7 +11,7 @@ class WebchatSettingsCommandTest extends TestCase
     public function testCommandRun()
     {
         $this->app['config']->set(
-            'opendialog.component_setting',
+            'opendialog.component_settings',
             [
                 WebchatSetting::GENERAL => [
                     WebchatSetting::URL => [
