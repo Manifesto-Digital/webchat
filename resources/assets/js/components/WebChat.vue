@@ -358,7 +358,8 @@ export default {
         .format("hh:mm:ss A");
 
       if (this.attributeName) {
-        newMsg.data.callback_value = `${this.attributeName}.${newMsg.data.text}`
+        const escapeText = newMsg.data.text.replace(/\./g, "\\.")
+        newMsg.data.callback_value = `${this.attributeName}.${escapeText}`
       }
 
       newMsg.user_id = this.user.email ? this.user.email : this.$store.state.uuid;
