@@ -374,51 +374,15 @@ WebChatMode.prototype.sendResponseSuccess = function(response, sentMessage, webC
             webChatComponent.showFullPageRichInputMessage(message);
           }
 
+          if (message.type === "long_text") {
+            webChatComponent.showLongTextInputMessage(message);
+          }
+
           if (message.type !== "fp-form" && message.type !== "fp-rich" && message.type !== "long_text") {
             webChatComponent.showFullPageFormInput = false;
             webChatComponent.showFullPageRichInput = false;
             webChatComponent.showLongTextInput = false;
             webChatComponent.showMessages = true;
-          }
-
-          if (message.type === "long_text") {
-            webChatComponent.showLongTextInputMessage(message);
-            if (message.data.character_limit) {
-              webChatComponent.maxInputCharacters = message.data.character_limit;
-            }
-
-            if (message.data.submit_text) {
-              webChatComponent.buttonText = message.data.submit_text;
-            }
-
-            if (message.data.text) {
-              webChatComponent.headerText = message.data.text;
-            }
-
-            if (message.data.placeholder) {
-              webChatComponent.placeholder = message.data.placeholder;
-            }
-
-            if (message.data.initial_text) {
-              webChatComponent.initialText = message.data.initial_text;
-            } else {
-              webChatComponent.initialText = null;
-            }
-
-            if (message.data.confirmation_text) {
-              webChatComponent.confirmationMessage = message.data.confirmation_text;
-            } else {
-              webChatComponent.confirmationMessage = null;
-            }
-
-            webChatComponent.showLongTextInput = true;
-            webChatComponent.showMessages = false;
-          }
-
-          if (message.data.attribute_name) {
-            webChatComponent.attributeName = message.data.attribute_name;
-          } else {
-            webChatComponent.attributeName = null;
           }
 
           resolve(webChatComponent.messageList)

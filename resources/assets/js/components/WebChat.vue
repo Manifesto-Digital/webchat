@@ -960,6 +960,40 @@ export default {
       this.showFullPageFormInput = false;
       this.showFullPageRichInput = false;
       this.showLongTextInput = true;
+
+      if (message.data.character_limit) {
+        this.maxInputCharacters = message.data.character_limit;
+      }
+
+      if (message.data.submit_text) {
+        this.buttonText = message.data.submit_text;
+      }
+
+      if (message.data.text) {
+        this.headerText = message.data.text;
+      }
+
+      if (message.data.placeholder) {
+        this.placeholder = message.data.placeholder;
+      }
+
+      if (message.data.initial_text) {
+        this.initialText = message.data.initial_text;
+      } else {
+        this.initialText = null;
+      }
+
+      if (message.data.confirmation_text) {
+        this.confirmationMessage = message.data.confirmation_text;
+      } else {
+        this.confirmationMessage = null;
+      }
+
+      if (message.data.attribute_name) {
+        this.attributeName = message.data.attribute_name;
+      } else {
+        this.attributeName = null;
+      }
     },
     setChatMode(data) {
       this.$emit("setChatMode", data);
