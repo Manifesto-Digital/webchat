@@ -41,6 +41,7 @@
         :buttonText="buttonText"
         :confirmationMessage="confirmationMessage"
         :onSubmit="onUserInputSubmit"
+        :onEditClick="onEditClick"
         :placeholder="placeholder"
         :initialText="initialText" />
     </template>
@@ -168,6 +169,10 @@ export default {
       required: true
     },
     onLinkClick: {
+      type: Function,
+      required: true
+    },
+    onEditClick: {
       type: Function,
       required: true
     },

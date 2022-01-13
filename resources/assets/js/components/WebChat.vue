@@ -37,6 +37,7 @@
         :on-list-button-click="onListButtonClick"
         :on-link-click="onLinkClick"
         :on-restart-button-click="onRestartButtonClick"
+        :on-edit-click="onEditClick"
         :on-download="download"
         :content-editable="contentEditable"
         :show-expand-button="false"
@@ -344,7 +345,6 @@ export default {
       }
     },
     sendMessage(msg) {
-      console.log('preparing')
       const newMsg = msg;
 
       newMsg.mode = this.modeData.mode;
@@ -585,6 +585,13 @@ export default {
         data: {
           url
         }
+      });
+    },
+    onEditClick() {
+      this.sendMessage({
+        type: "long_text_edit",
+        author: this.$store.state.uuid,
+        data: {}
       });
     },
     onFormButtonClick(data, msg) {

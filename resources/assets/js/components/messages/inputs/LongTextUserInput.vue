@@ -54,6 +54,10 @@ export default {
       type: Function,
       required: true
     },
+    onEditClick: {
+      type: Function,
+      required: true
+    },
     headerText: {
       type: String,
       default: ''
@@ -119,7 +123,8 @@ export default {
       this._submitText()
     },
     submitEdit(event) {
-      event.preventDefault()
+      event.preventDefault();
+      this.onEditClick({data: {}})
 
       this.contentEditable = true
       this.showConfirmationMessage = false
