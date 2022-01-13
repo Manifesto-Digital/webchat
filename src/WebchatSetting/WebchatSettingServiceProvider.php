@@ -21,7 +21,7 @@ class WebchatSettingServiceProvider extends ServiceProvider
             return new WebchatSettingService();
         });
 
-        $this->mergeConfigFrom(__DIR__ . '/config/opendialog-webchatsetting.php', 'opendialog.webchat_setting');
+        $this->mergeConfigFrom(__DIR__ . '/config/opendialog-webchatsetting.php', 'opendialog.component_settings');
     }
 
     public function mergeConfigFrom($path, $key)
