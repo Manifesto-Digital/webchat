@@ -13,7 +13,7 @@
     "require": {
         "php": "^7.4 || ^8.0",
         "genealabs/laravel-caffeine": "^8.0",
-        "opendialogai/core": "1.x-dev"
+        "opendialogai/core": "OPNDLG-1335--generalise-setting"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.0",
@@ -44,10 +44,6 @@
         {
             "type": "vcs",
             "url": "https://github.com/opendialogai/google-cloud-php-dialogflow"
-        },
-        {
-            "type": "path",
-            "url": "../core"
         }
     ]
 }
