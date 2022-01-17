@@ -357,7 +357,7 @@ export default {
         .tz("UTC")
         .format("hh:mm:ss A");
 
-      if (this.attributeName) {
+      if (this.attributeName && newMsg.data.text) {
         const escapeText = newMsg.data.text.replace(/\./g, "\\.")
         newMsg.data.callback_value = `${this.attributeName}.${escapeText}`
       }
