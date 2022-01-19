@@ -37,6 +37,7 @@
         :on-list-button-click="onListButtonClick"
         :on-link-click="onLinkClick"
         :on-restart-button-click="onRestartButtonClick"
+        :on-edit-click="onEditClick"
         :on-download="download"
         :content-editable="contentEditable"
         :show-expand-button="false"
@@ -53,9 +54,11 @@
         :placeholder="placeholder"
         :confirmation-message="confirmationMessage"
         :initial-text="initialText"
+        :headerText="headerText"
         :mode-data="modeData"
         :fp-form-input-message="fpFormInputMessage"
         :fp-rich-input-message="fpRichInputMessage"
+        :long-text-input-message="longTextInputMessage"
         :cta-text="ctaText"
         :hide-message-time="hideMessageTime"
         @vbc-user-input-focus="userInputFocus"
@@ -182,6 +185,7 @@ export default {
       ctaText: [],
       fpFormInputMessage: {},
       fpRichInputMessage: {},
+      longTextInputMessage: {},
       headerHeight: 0,
       headerText: "",
       id: "",
@@ -201,6 +205,7 @@ export default {
       chatbotAvatar: this.chatbotAvatarPath,
       chatMode: "webchat",
       canRestart: true,
+      attributeName: null
     };
   },
   watch: {
@@ -352,6 +357,11 @@ export default {
         .tz("UTC")
         .format("hh:mm:ss A");
 
+      if (this.attributeName && newMsg.data.text) {
+        const escapeText = newMsg.data.text.replace(/\./g, "\\.")
+        newMsg.data.callback_value = `${this.attributeName}.${escapeText}`
+      }
+
       newMsg.user_id = this.user.email ? this.user.email : this.$store.state.uuid;
       newMsg.user = this.user;
 
@@ -425,12 +435,13 @@ export default {
       const msgToSend = msg;
       if (
         this.messageList.length &&
-        this.messageList[this.messageList.length - 1].type === "longtext"
+        this.messageList[this.messageList.length - 1].type === "long_text"
       ) {
         msgToSend.type = "longtext_response";
         msgToSend.callback_id = this.messageList[
           this.messageList.length - 1
         ].data.callback_id;
+        this.showMessages = true;
       }
 
       this.sendMessage(msgToSend);
@@ -575,6 +586,13 @@ export default {
         data: {
           url
         }
+      });
+    },
+    onEditClick() {
+      this.sendMessage({
+        type: "long_text_edit",
+        author: this.$store.state.uuid,
+        data: {}
       });
     },
     onFormButtonClick(data, msg) {
@@ -854,6 +872,10 @@ export default {
               if (currentMessage.type === "fp-rich") {
                 this.showFullPageRichInputMessage(currentMessage);
               }
+
+              if (currentMessage.type === "long_text") {
+                this.showLongTextInputMessage(currentMessage);
+              }
             }
 
             currentMessage.mode = this.modeData.mode;
@@ -929,6 +951,7 @@ export default {
       this.showMessages = false;
       this.showFullPageRichInput = false;
       this.showFullPageFormInput = true;
+      this.showLongTextInput = false;
     },
     showFullPageRichInputMessage(message) {
       this.fpRichInputMessage = message;
@@ -936,6 +959,49 @@ export default {
       this.showMessages = false;
       this.showFullPageFormInput = false;
       this.showFullPageRichInput = true;
+      this.showLongTextInput = false;
+    },
+    showLongTextInputMessage(message) {
+      this.longTextInputMessage = message;
+
+      this.showMessages = false;
+      this.showFullPageFormInput = false;
+      this.showFullPageRichInput = false;
+      this.showLongTextInput = true;
+
+      if (message.data.character_limit) {
+        this.maxInputCharacters = message.data.character_limit;
+      }
+
+      if (message.data.submit_text) {
+        this.buttonText = message.data.submit_text;
+      }
+
+      if (message.data.text) {
+        this.headerText = message.data.text;
+      }
+
+      if (message.data.placeholder) {
+        this.placeholder = message.data.placeholder;
+      }
+
+      if (message.data.initial_text) {
+        this.initialText = message.data.initial_text;
+      } else {
+        this.initialText = null;
+      }
+
+      if (message.data.confirmation_text) {
+        this.confirmationMessage = message.data.confirmation_text;
+      } else {
+        this.confirmationMessage = null;
+      }
+
+      if (message.data.attribute_name) {
+        this.attributeName = message.data.attribute_name;
+      } else {
+        this.attributeName = null;
+      }
     },
     setChatMode(data) {
       this.$emit("setChatMode", data);

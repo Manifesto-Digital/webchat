@@ -27,12 +27,12 @@ WebChatMode.prototype.sendRequest = function(message, webChatComponent) {
       webChatComponent.messageList.push(typingMessage)
     }
 
-
     if (
       message.type === "chat_open" ||
       message.type === "url_click" ||
       message.type === "trigger" ||
       message.type === "form_response" ||
+      message.type === "long_text_edit" ||
       message.data.text.length > 0
     ) {
       // Make a copy of the message to send to the backend.
@@ -252,9 +252,14 @@ WebChatMode.prototype.sendResponseSuccess = function(response, sentMessage, webC
               webChatComponent.showFullPageRichInputMessage(message);
             }
 
-            if (message.type !== "fp-form" && message.type !== "fp-rich") {
+            if (message.type === "long_text") {
+              webChatComponent.showLongTextInputMessage(message);
+            }
+
+            if (message.type !== "fp-form" && message.type !== "fp-rich" && message.type !== "long_text") {
               webChatComponent.showFullPageFormInput = false;
               webChatComponent.showFullPageRichInput = false;
+              webChatComponent.showLongTextInput = false;
               webChatComponent.showMessages = true;
             }
 
@@ -314,6 +319,10 @@ WebChatMode.prototype.sendResponseSuccess = function(response, sentMessage, webC
               webChatComponent.showFullPageRichInputMessage(message);
             }
 
+            if (message.type === "long_text") {
+              webChatComponent.showLongTextInputMessage(message);
+            }
+
             webChatComponent.contentEditable = !message.data.disable_text;
 
             resolve(webChatComponent.messageList)
@@ -366,43 +375,15 @@ WebChatMode.prototype.sendResponseSuccess = function(response, sentMessage, webC
             webChatComponent.showFullPageRichInputMessage(message);
           }
 
-          if (message.type !== "fp-form" && message.type !== "fp-rich") {
-            webChatComponent.showFullPageFormInput = false;
-            webChatComponent.showFullPageRichInput = false;
-            webChatComponent.showMessages = true;
+          if (message.type === "long_text") {
+            webChatComponent.showLongTextInputMessage(message);
           }
 
-          if (message.type === "longtext") {
-            if (message.data.character_limit) {
-              webChatComponent.maxInputCharacters = message.data.character_limit;
-            }
-
-            if (message.data.submit_text) {
-              webChatComponent.buttonText = message.data.submit_text;
-            }
-
-            if (message.data.text) {
-              webChatComponent.headerText = message.data.text;
-            }
-
-            if (message.data.placeholder) {
-              webChatComponent.placeholder = message.data.placeholder;
-            }
-
-            if (message.data.initial_text) {
-              webChatComponent.initialText = message.data.initial_text;
-            } else {
-              webChatComponent.initialText = null;
-            }
-
-            if (message.data.confirmation_text) {
-              webChatComponent.confirmationMessage = message.data.confirmation_text;
-            } else {
-              webChatComponent.confirmationMessage = null;
-            }
-
-            webChatComponent.showLongTextInput = true;
-            webChatComponent.showMessages = false;
+          if (message.type !== "fp-form" && message.type !== "fp-rich" && message.type !== "long_text") {
+            webChatComponent.showFullPageFormInput = false;
+            webChatComponent.showFullPageRichInput = false;
+            webChatComponent.showLongTextInput = false;
+            webChatComponent.showMessages = true;
           }
 
           resolve(webChatComponent.messageList)

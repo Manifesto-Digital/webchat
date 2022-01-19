@@ -18,7 +18,7 @@
     />
 
     <TextMessage
-      v-else-if="message.type === 'text' || message.type === 'longtext_response'"
+      v-else-if="message.type === 'text' || message.type === 'longtext_response' || message.type === 'long_text'"
       :data="message.data"
       :author="message.author"
       :type="message.type"
@@ -39,11 +39,6 @@
       :onButtonClick="onButtonClick"
       :onLinkClick="onLinkClick"
       :author="message.author"
-    />
-
-    <LongTextMessage
-      v-else-if="message.type === 'longtext'"
-      :data="message.data"
     />
 
     <TypingMessage
@@ -146,7 +141,6 @@
   import ButtonResponseMessage from "./messages/responses/ButtonResponseMessage.vue";
   import RichMessage from "./messages/RichMessage.vue";
   import TextMessage from "./messages/TextMessage.vue";
-  import LongTextMessage from "./messages/LongTextMessage.vue";
   import TypingMessage from "./messages/TypingMessage.vue";
   import AuthorMessage from "./messages/AuthorMessage.vue";
   import chatIcon from "./assets/chat-icon.svg";
@@ -172,7 +166,6 @@
     RichMessage,
     FpRichMessage,
     TextMessage,
-    LongTextMessage,
     TypingMessage,
     AuthorMessage,
     HandToSystemMessage,

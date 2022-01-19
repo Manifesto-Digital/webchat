@@ -17,6 +17,7 @@
       :onRestartButtonClick="onRestartButtonClick"
       :onDownload="onDownload"
       :onLinkClick="onLinkClick"
+      :onEditClick="onEditClick"
       :contentEditable="contentEditable"
       :showExpandButton="showExpandButton"
       :placeholder="placeholder"
@@ -182,6 +183,10 @@ export default {
       required: true
     },
     onLinkClick: {
+      type: Function,
+      required: true
+    },
+    onEditClick: {
       type: Function,
       required: true
     },
