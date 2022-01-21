@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7510f49b3219be8de4cf4d59cd4c3e18",
+    "content-hash": "7c53ce96e04a93f1e89efcb67a7974f9",
     "packages": [
         {
             "name": "brick/math",
@@ -5745,16 +5745,16 @@
         },
         {
             "name": "opendialogai/core",
-            "version": "1.6.2",
+            "version": "dev-OPNDLG-1335--generalise-setting",
             "source": {
                 "type": "git",
                 "url": "https://github.com/opendialogai/core.git",
-                "reference": "1ebb0af91d78cb921e693e50107a85a3f508c4af"
+                "reference": "25fc5bcfbaf4a629ab84013d9e1dca83f501f63f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/opendialogai/core/zipball/1ebb0af91d78cb921e693e50107a85a3f508c4af",
-                "reference": "1ebb0af91d78cb921e693e50107a85a3f508c4af",
+                "url": "https://api.github.com/repos/opendialogai/core/zipball/25fc5bcfbaf4a629ab84013d9e1dca83f501f63f",
+                "reference": "25fc5bcfbaf4a629ab84013d9e1dca83f501f63f",
                 "shasum": ""
             },
             "require": {
@@ -5835,9 +5835,9 @@
             "description": "The OpenDialog Core package",
             "support": {
                 "issues": "https://github.com/opendialogai/core/issues",
-                "source": "https://github.com/opendialogai/core/tree/1.6.2"
+                "source": "https://github.com/opendialogai/core/tree/OPNDLG-1335--generalise-setting"
             },
-            "time": "2021-10-27T14:01:45+00:00"
+            "time": "2022-01-18T08:50:03+00:00"
         },
         {
             "name": "orchestra/testbench",
@@ -8656,12 +8656,14 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "opendialogai/core": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
         "php": "^7.4 || ^8.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.1.0"
 }
