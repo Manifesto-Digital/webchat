@@ -27,7 +27,7 @@
 
           <div
             class="od-header-nav__team-name"
-            :class="{'invisible': showFullPageFormInput || showFullPageRichInput}"
+            :class="{'invisible': showFullPageFormInput || showFullPageRichInput || showLongTextInput}"
             v-if="teamName">
             <span v-html="teamName"></span>
           </div>
@@ -35,7 +35,7 @@
 
         <div
           class="od-header-nav__buttons"
-          :class="{'invisible': !showHeaderButtonsOnFullPageMessages && (showFullPageFormInput || showFullPageRichInput)}"
+          :class="{'invisible': !showHeaderButtonsOnFullPageMessages && (showFullPageFormInput || showFullPageRichInput || showLongTextInput)}"
         >
           <div
             v-if="showRestartButton"
@@ -145,6 +145,10 @@ export default {
       default: true
     },
     showFullPageRichInput: {
+      type: Boolean,
+      default: true
+    },
+    showLongTextInput: {
       type: Boolean,
       default: true
     },

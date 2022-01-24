@@ -15,6 +15,7 @@
       :ctaText="ctaText"
       :showFullPageFormInput="showFullPageFormInput"
       :showFullPageRichInput="showFullPageRichInput"
+      :showLongTextInput="showLongTextInput"
     />
     <ProgressBar v-show="$store.state.messageMetaData.progressPercent !== null" />
     <MessageList
@@ -40,6 +41,7 @@
         :buttonText="buttonText"
         :confirmationMessage="confirmationMessage"
         :onSubmit="onUserInputSubmit"
+        :onEditClick="onEditClick"
         :placeholder="placeholder"
         :initialText="initialText" />
     </template>
@@ -110,6 +112,10 @@ export default {
       type: Object,
       default: () => {}
     },
+    longTextInputMessage: {
+      type: Object,
+      default: () => {}
+    },
     showEmoji: {
       type: Boolean,
       default: false
@@ -163,6 +169,10 @@ export default {
       required: true
     },
     onLinkClick: {
+      type: Function,
+      required: true
+    },
+    onEditClick: {
       type: Function,
       required: true
     },
