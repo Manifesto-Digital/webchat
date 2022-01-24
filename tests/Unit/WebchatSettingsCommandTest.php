@@ -11,7 +11,7 @@ class WebchatSettingsCommandTest extends TestCase
     public function testCommandRun()
     {
         $this->app['config']->set(
-            'opendialog.component_settings',
+            'opendialog.component_settings.' . WebchatSetting::WEBCHAT_CONFIG,
             [
                 WebchatSetting::GENERAL => [
                     WebchatSetting::URL => [
@@ -58,5 +58,6 @@ class WebchatSettingsCommandTest extends TestCase
         $this->assertEquals('The name displayed in the chatbot header', $teamName->description);
         $this->assertEquals(1, $teamName->parent_id);
         $this->assertEquals(3, $teamName->sibling);
+        $this->assertEquals(WebchatSetting::WEBCHAT, $teamName->component_id);
     }
 }

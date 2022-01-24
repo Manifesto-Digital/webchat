@@ -5749,12 +5749,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/opendialogai/core.git",
-                "reference": "25fc5bcfbaf4a629ab84013d9e1dca83f501f63f"
+                "reference": "90a6c746358ca9bcdf3b962a19a3272af45c4a86"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/opendialogai/core/zipball/25fc5bcfbaf4a629ab84013d9e1dca83f501f63f",
-                "reference": "25fc5bcfbaf4a629ab84013d9e1dca83f501f63f",
+                "url": "https://api.github.com/repos/opendialogai/core/zipball/90a6c746358ca9bcdf3b962a19a3272af45c4a86",
+                "reference": "90a6c746358ca9bcdf3b962a19a3272af45c4a86",
                 "shasum": ""
             },
             "require": {
@@ -5837,7 +5837,7 @@
                 "issues": "https://github.com/opendialogai/core/issues",
                 "source": "https://github.com/opendialogai/core/tree/OPNDLG-1335--generalise-setting"
             },
-            "time": "2022-01-18T08:50:03+00:00"
+            "time": "2022-01-24T14:16:15+00:00"
         },
         {
             "name": "orchestra/testbench",
