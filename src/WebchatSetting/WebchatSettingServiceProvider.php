@@ -3,6 +3,7 @@
 namespace OpenDialogAi\Webchat\WebchatSetting;
 
 use Illuminate\Support\ServiceProvider;
+use OpenDialogAi\Webchat\WebchatSetting;
 use OpenDialogAi\Webchat\WebchatSetting\Service\WebchatSettingService;
 use OpenDialogAi\Webchat\WebchatSetting\Service\WebchatSettingServiceInterface;
 
@@ -21,7 +22,7 @@ class WebchatSettingServiceProvider extends ServiceProvider
             return new WebchatSettingService();
         });
 
-        $this->mergeConfigFrom(__DIR__ . '/config/opendialog-webchatsetting.php', 'opendialog.component_settings');
+        $this->mergeConfigFrom(__DIR__ . '/config/opendialog-webchatsetting.php', "opendialog.component_settings." . WebchatSetting::WEBCHAT_CONFIG);
     }
 
     public function mergeConfigFrom($path, $key)

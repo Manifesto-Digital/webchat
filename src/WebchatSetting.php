@@ -129,6 +129,7 @@ class WebchatSetting
     public const MAP     = 'map';
     public const BOOLEAN = 'boolean';
     public const OBJECT  = 'object';
+    public const IMAGE   = 'image';
 
     // Bot
     public const BOT = 'bot';
@@ -139,8 +140,12 @@ class WebchatSetting
     public const END_CHAT_CONFIRMATION_POSITIVE = 'endChatConfirmationPositive';
     public const END_CHAT_CONFIRMATION_NEGATIVE = 'endChatConfirmationNegative';
 
+    // Component
+    public const WEBCHAT = 'platform.core.webchat';
+    public const WEBCHAT_CONFIG = 'platform_core_webchat';
+
     public static function getSettings()
     {
-        return config('opendialog.component_setting');
+        return config("opendialog.component_setting." . static::WEBCHAT_CONFIG);
     }
 }
