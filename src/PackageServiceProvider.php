@@ -54,7 +54,7 @@ class PackageServiceProvider extends ServiceProvider
     {
         if (!app()->runningInConsole()) {
             // Sets the url to the app url
-            app()['config']->set('webchat.' . ComponentSetting::URL, config("APP_URL"));
+            app()['config']->set('webchat.' . WebchatSetting::URL, config("APP_URL"));
 
             /** @var ComponentSetting $componentSetting */
             foreach (ComponentSetting::all() as $componentSetting) {
