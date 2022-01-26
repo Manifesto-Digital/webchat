@@ -4,7 +4,6 @@ namespace OpenDialogAi\Webchat;
 
 use Illuminate\Support\ServiceProvider;
 use OpenDialogAi\Core\Console\Commands\ComponentSettings;
-use OpenDialogAi\Core\ComponentSetting;
 
 class PackageServiceProvider extends ServiceProvider
 {
@@ -32,8 +31,6 @@ class PackageServiceProvider extends ServiceProvider
             $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
         }
 
-        $this->loadWebchatConfig();
-
         if ($this->app->runningInConsole()) {
             $this->commands([
                 ComponentSettings::class,
@@ -44,34 +41,5 @@ class PackageServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/webchat.php', 'opendialog.webchat');
-    }
-
-    /**
-     * Pulls in the webchat settings from the database and loads into Laravel config.
-     * Will only load the settings if not running from the console
-     */
-    private function loadWebchatConfig()
-    {
-        if (!app()->runningInConsole()) {
-            // Sets the url to the app url
-            app()['config']->set('webchat.' . WebchatSetting::URL, config("APP_URL"));
-
-            /** @var ComponentSetting $componentSetting */
-            foreach (ComponentSetting::all() as $componentSetting) {
-                if ($componentSetting->value !== null) {
-                    if ($componentSetting->type == ComponentSetting::MAP) {
-                        $value = json_decode($componentSetting->value);
-                    } elseif ($componentSetting->type === ComponentSetting::NUMBER) {
-                        $value = (float) $componentSetting->value;
-                    } elseif ($componentSetting->type === ComponentSetting::BOOLEAN) {
-                        $value = (bool) $componentSetting->value;
-                    } else {
-                        $value = $componentSetting->value;
-                    }
-
-                    app()['config']->set('webchat.' . $componentSetting->name, $value);
-                }
-            }
-        }
     }
 }
