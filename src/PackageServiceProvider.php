@@ -2,9 +2,9 @@
 
 namespace OpenDialogAi\Webchat;
 
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
-use OpenDialogAi\Webchat\Console\Commands\WebchatSettings;
+use OpenDialogAi\Core\Console\Commands\ComponentSettings;
+use OpenDialogAi\Core\ComponentSetting;
 
 class PackageServiceProvider extends ServiceProvider
 {
@@ -36,7 +36,7 @@ class PackageServiceProvider extends ServiceProvider
 
         if ($this->app->runningInConsole()) {
             $this->commands([
-                WebchatSettings::class,
+                ComponentSettings::class,
             ]);
         }
     }
@@ -56,20 +56,20 @@ class PackageServiceProvider extends ServiceProvider
             // Sets the url to the app url
             app()['config']->set('webchat.' . WebchatSetting::URL, config("APP_URL"));
 
-            /** @var WebchatSetting $webchatSetting */
-            foreach (WebchatSetting::all() as $webchatSetting) {
-                if ($webchatSetting->value !== null) {
-                    if ($webchatSetting->type == WebchatSetting::MAP) {
-                        $value = json_decode($webchatSetting->value);
-                    } elseif ($webchatSetting->type === WebchatSetting::NUMBER) {
-                        $value = (float) $webchatSetting->value;
-                    } elseif ($webchatSetting->type === WebchatSetting::BOOLEAN) {
-                        $value = (bool) $webchatSetting->value;
+            /** @var ComponentSetting $componentSetting */
+            foreach (ComponentSetting::all() as $componentSetting) {
+                if ($componentSetting->value !== null) {
+                    if ($componentSetting->type == ComponentSetting::MAP) {
+                        $value = json_decode($componentSetting->value);
+                    } elseif ($componentSetting->type === ComponentSetting::NUMBER) {
+                        $value = (float) $componentSetting->value;
+                    } elseif ($componentSetting->type === ComponentSetting::BOOLEAN) {
+                        $value = (bool) $componentSetting->value;
                     } else {
-                        $value = $webchatSetting->value;
+                        $value = $componentSetting->value;
                     }
 
-                    app()['config']->set('webchat.' . $webchatSetting->name, $value);
+                    app()['config']->set('webchat.' . $componentSetting->name, $value);
                 }
             }
         }

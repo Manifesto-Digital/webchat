@@ -2,8 +2,6 @@
 
 namespace OpenDialogAi\Webchat;
 
-use Illuminate\Database\Eloquent\Model;
-
 /**
  * @property int $id
  * @property \Carbon\Carbon $created_at
@@ -16,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string display_name
  * @property boolean display
  */
-class WebchatSetting extends Model
+class WebchatSetting
 {
     public const NAME = 'name';
     public const DESCRIPTION = 'description';
@@ -26,6 +24,7 @@ class WebchatSetting extends Model
     public const DISPLAY = 'display';
     public const TYPE = 'type';
     public const SIBLING = 'sibling';
+    public const COMPONENT = 'component_id';
 
     // General
     public const GENERAL                   = 'general';
@@ -130,6 +129,7 @@ class WebchatSetting extends Model
     public const MAP     = 'map';
     public const BOOLEAN = 'boolean';
     public const OBJECT  = 'object';
+    public const IMAGE   = 'image';
 
     // Bot
     public const BOT = 'bot';
@@ -140,49 +140,12 @@ class WebchatSetting extends Model
     public const END_CHAT_CONFIRMATION_POSITIVE = 'endChatConfirmationPositive';
     public const END_CHAT_CONFIRMATION_NEGATIVE = 'endChatConfirmationNegative';
 
-    protected $fillable = [
-        'name',
-        'type',
-        'display_name',
-        'display',
-        'description',
-        'section',
-        'subsection',
-        'parent_id',
-        'sibling'
-    ];
-
-    protected $casts = [
-        'display' => 'boolean'
-    ];
-
-    /**
-     * Define parent relationship.
-     */
-    public function parent()
-    {
-        return $this->belongsTo(
-            'OpenDialogAi\Webchat\WebchatSetting',
-            'parent_id'
-        );
-    }
-
-    /**
-     * Define child relationship.
-     */
-    public function children()
-    {
-        return $this->hasMany('OpenDialogAi\Webchat\WebchatSetting',
-        'parent_id');
-    }
-
-    public function scopeNonTopLevel($query)
-    {
-        return $query->whereNotNull('parent_id');
-    }
+    // Component
+    public const WEBCHAT = 'platform.core.webchat';
+    public const WEBCHAT_CONFIG = 'platform_core_webchat';
 
     public static function getSettings()
     {
-        return config('opendialog.webchat_setting');
+        return config("opendialog.component_setting." . static::WEBCHAT_CONFIG);
     }
 }

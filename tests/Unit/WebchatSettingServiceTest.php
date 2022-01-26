@@ -17,7 +17,7 @@ class WebchatSettingServiceTest extends TestCase
 
     public function testSettingOverlay()
     {
-        $settings = config('opendialog.webchat_setting');
+        $settings = config("opendialog.component_settings." . WebchatSetting::WEBCHAT_CONFIG);
         $this->assertArrayHasKey(WebchatSetting::GENERAL, $settings);
         $this->assertNotContains('myCustomSetting1', array_keys($settings[WebchatSetting::GENERAL]));
         $this->assertNotContains('myCustomSetting2', array_keys($settings[WebchatSetting::GENERAL]));
@@ -25,10 +25,10 @@ class WebchatSettingServiceTest extends TestCase
 
         resolve(WebchatSettingServiceInterface::class)->mergeConfigFrom(
             __DIR__ . '/Example/opendialog-webchatsetting-custom.php',
-            'opendialog.webchat_setting'
+            "opendialog.component_settings." . WebchatSetting::WEBCHAT_CONFIG
         );
 
-        $settings = config('opendialog.webchat_setting');
+        $settings = config("opendialog.component_settings." . WebchatSetting::WEBCHAT_CONFIG);
 
         $this->assertArrayHasKey(WebchatSetting::GENERAL, $settings);
 
