@@ -2,9 +2,8 @@
 
 namespace OpenDialogAi\Webchat;
 
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
-use OpenDialogAi\Webchat\Console\Commands\WebchatSettings;
+use OpenDialogAi\Core\Console\Commands\ComponentSettings;
 
 class PackageServiceProvider extends ServiceProvider
 {
@@ -32,11 +31,9 @@ class PackageServiceProvider extends ServiceProvider
             $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
         }
 
-        $this->loadWebchatConfig();
-
         if ($this->app->runningInConsole()) {
             $this->commands([
-                WebchatSettings::class,
+                ComponentSettings::class,
             ]);
         }
     }
@@ -44,34 +41,5 @@ class PackageServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/webchat.php', 'opendialog.webchat');
-    }
-
-    /**
-     * Pulls in the webchat settings from the database and loads into Laravel config.
-     * Will only load the settings if not running from the console
-     */
-    private function loadWebchatConfig()
-    {
-        if (!app()->runningInConsole()) {
-            // Sets the url to the app url
-            app()['config']->set('webchat.' . WebchatSetting::URL, config("APP_URL"));
-
-            /** @var WebchatSetting $webchatSetting */
-            foreach (WebchatSetting::all() as $webchatSetting) {
-                if ($webchatSetting->value !== null) {
-                    if ($webchatSetting->type == WebchatSetting::MAP) {
-                        $value = json_decode($webchatSetting->value);
-                    } elseif ($webchatSetting->type === WebchatSetting::NUMBER) {
-                        $value = (float) $webchatSetting->value;
-                    } elseif ($webchatSetting->type === WebchatSetting::BOOLEAN) {
-                        $value = (bool) $webchatSetting->value;
-                    } else {
-                        $value = $webchatSetting->value;
-                    }
-
-                    app()['config']->set('webchat.' . $webchatSetting->name, $value);
-                }
-            }
-        }
     }
 }

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7510f49b3219be8de4cf4d59cd4c3e18",
+    "content-hash": "a2c44607362eed3be53ee2c64fbd8ac7",
     "packages": [
         {
             "name": "brick/math",
@@ -5745,16 +5745,16 @@
         },
         {
             "name": "opendialogai/core",
-            "version": "1.6.2",
+            "version": "1.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/opendialogai/core.git",
-                "reference": "1ebb0af91d78cb921e693e50107a85a3f508c4af"
+                "reference": "bc5e49f5277b0293066eee3dbcba4d2fbe19f147"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/opendialogai/core/zipball/1ebb0af91d78cb921e693e50107a85a3f508c4af",
-                "reference": "1ebb0af91d78cb921e693e50107a85a3f508c4af",
+                "url": "https://api.github.com/repos/opendialogai/core/zipball/bc5e49f5277b0293066eee3dbcba4d2fbe19f147",
+                "reference": "bc5e49f5277b0293066eee3dbcba4d2fbe19f147",
                 "shasum": ""
             },
             "require": {
@@ -5784,6 +5784,7 @@
                 "phpunit/phpunit": "^9.0",
                 "squizlabs/php_codesniffer": "^3.4"
             },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
@@ -5801,7 +5802,8 @@
                         "OpenDialogAi\\ContextEngine\\ContextEngineServiceProvider",
                         "OpenDialogAi\\ActionEngine\\ActionEngineServiceProvider",
                         "OpenDialogAi\\SensorEngine\\SensorEngineServiceProvider",
-                        "OpenDialogAi\\NlpEngine\\NlpEngineServiceProvider"
+                        "OpenDialogAi\\NlpEngine\\NlpEngineServiceProvider",
+                        "OpenDialogAi\\Core\\FileUploadServiceProvider"
                     ],
                     "aliases": {
                         "AttributeResolver": "OpenDialogAi\\AttributeEngine\\Facades\\AttributeResolver"
@@ -5835,9 +5837,9 @@
             "description": "The OpenDialog Core package",
             "support": {
                 "issues": "https://github.com/opendialogai/core/issues",
-                "source": "https://github.com/opendialogai/core/tree/1.6.2"
+                "source": "https://github.com/opendialogai/core/tree/1.x"
             },
-            "time": "2021-10-27T14:01:45+00:00"
+            "time": "2022-01-26T13:58:11+00:00"
         },
         {
             "name": "orchestra/testbench",
@@ -8656,12 +8658,14 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "opendialogai/core": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
         "php": "^7.4 || ^8.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.1.0"
 }

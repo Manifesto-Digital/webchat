@@ -4,13 +4,14 @@ namespace OpenDialogAi\Webchat\Tests\Unit;
 
 use OpenDialogAi\Webchat\Tests\TestCase;
 use OpenDialogAi\Webchat\WebchatSetting;
+use OpenDialogAi\Core\ComponentSetting;
 
 class WebchatSettingsCommandTest extends TestCase
 {
     public function testCommandRun()
     {
         $this->app['config']->set(
-            'opendialog.webchat_setting',
+            'opendialog.component_settings.' . WebchatSetting::WEBCHAT_CONFIG,
             [
                 WebchatSetting::GENERAL => [
                     WebchatSetting::URL => [
@@ -39,16 +40,16 @@ class WebchatSettingsCommandTest extends TestCase
             ]
         );
 
-        $this->artisan('webchat:settings');
+        $this->artisan('component:settings');
 
-        $this->assertCount(4, WebchatSetting::all());
+        $this->assertCount(4, ComponentSetting::all());
 
-        $this->assertDatabaseHas('webchat_settings', ['name' => 'general']);
-        $this->assertDatabaseHas('webchat_settings', ['name' => 'url']);
-        $this->assertDatabaseHas('webchat_settings', ['name' => 'teamName']);
-        $this->assertDatabaseHas('webchat_settings', ['name' => 'logo']);
+        $this->assertDatabaseHas('component_settings', ['name' => 'general']);
+        $this->assertDatabaseHas('component_settings', ['name' => 'url']);
+        $this->assertDatabaseHas('component_settings', ['name' => 'teamName']);
+        $this->assertDatabaseHas('component_settings', ['name' => 'logo']);
 
-        $teamName = WebchatSetting::where('name', 'teamName')->first();
+        $teamName = ComponentSetting::where('name', 'teamName')->first();
         $this->assertEquals('Chatbot Name', $teamName->display_name);
         $this->assertEquals('string', $teamName->type);
         $this->assertEquals(true, $teamName->display);
@@ -57,5 +58,6 @@ class WebchatSettingsCommandTest extends TestCase
         $this->assertEquals('The name displayed in the chatbot header', $teamName->description);
         $this->assertEquals(1, $teamName->parent_id);
         $this->assertEquals(3, $teamName->sibling);
+        $this->assertEquals(WebchatSetting::WEBCHAT, $teamName->component_id);
     }
 }
