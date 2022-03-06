@@ -14,12 +14,14 @@
     }]"
     v-linkified:options="{ format: function (value, type) { return '<span>' + value + '</span>'; } }"
   >
-    <span class="fade-enter-active" v-html="data.text"></span>
-      <p v-if="data.meta" class="sc-message--meta" >{{data.meta}}</p>
+    <span class="fade-enter-active" v-html="markdownToHtml"></span>
+    <p v-if="data.meta" class="sc-message--meta" >{{data.meta}}</p>
   </div>
 </template>
 
 <script>
+import { marked } from 'marked';
+
 export default {
   props: {
     author: {
@@ -37,6 +39,11 @@ export default {
     onLinkClick: {
       type: Function,
       required: true
+    }
+  },
+  computed: {
+    markdownToHtml(){
+      return marked(this.data.text, { gfm: true });
     }
   },
   methods: {
@@ -114,6 +121,16 @@ export default {
     white-space: -pre-wrap; /* Opera 4-6 */
     white-space: -o-pre-wrap; /* Opera 7 */
     word-wrap: break-word; /* Internet Explorer 5.5+ */
+  }
+
+  ol {
+    list-style-type: decimal;
+    margin-left: 20px;
+  }
+
+  ul {
+    list-style-type: disc;
+    margin-left: 20px;
   }
 }
 
